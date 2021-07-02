@@ -1,17 +1,23 @@
-import './App.css';
-import Dante from 'dante3';
 import React from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import { HomePage } from './pages/HomePage';
 
 function App() {
-	const [data, setData] = React.useState({});
-
 	return (
-		<div className="App">
-			<Dante
-				content={data}
-				onUpdate={(editor) => setData(editor.getJSON())}
-			/>
-		</div>
+		<Router>
+			<Navbar />
+			<Switch>
+				<Route exact path="/">
+					<HomePage />
+				</Route>
+			</Switch>
+		</Router>
 	);
 }
 
