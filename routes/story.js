@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { createStory } = require('../controllers/story');
+const {
+	createStory,
+	getStoryById,
+	getAllStories,
+} = require('../controllers/story');
 
 router.post('/', createStory);
+router.get('/', getAllStories);
+router.get('/:id', getStoryById);
 
 module.exports = router;

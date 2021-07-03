@@ -104,7 +104,7 @@ function Navbar() {
 		>
 			<>
 				<MenuItem>
-					<Link href="/ps2/form" underline="none">
+					<Link href="/story/new" underline="none">
 						<Button color="secondary">New</Button>
 					</Link>
 				</MenuItem>
@@ -123,14 +123,14 @@ function Navbar() {
 						color="primary"
 					>
 						<Link color="inherit" underline="none" href="/">
-							BITS Stories
+							BITSian Stories
 						</Link>
 					</Typography>
 
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						<>
-							<Link href="/ps2/form" underline="none">
+							<Link href="/story/new" underline="none">
 								<Button color="secondary">New</Button>
 							</Link>
 						</>
