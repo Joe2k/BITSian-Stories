@@ -13,26 +13,28 @@ const useStyles = makeStyles((theme) => ({
 export const HomePage = () => {
 	const classes = useStyles();
 	const [body, setBody] = useState();
-	const [heading, setHeading] = useState(
-		`<h1 class="graf graf--h"><span style="color: #000">A Catchy Heading...</span></h1>`
+	const [title, setTitle] = useState(
+		`<h1 class="graf graf--h"><span style="color: #000">A Catchy Title...</span></h1>`
 	);
 
 	useEffect(() => {
-		console.log(heading);
-	}, [heading]);
+		console.log(title);
+	}, [title]);
 
 	return (
 		<div className={classes.root}>
 			<Dante
-				bodyPlaceholder={'A Catchy Heading...'}
-				content={heading}
+				bodyPlaceholder={'A Catchy Title...'}
+				content={title}
+				widgets={[]}
 				onUpdate={(editor) => {
-					setHeading(editor.getHTML());
+					setTitle(editor.getHTML());
 				}}
 			/>
 			<Dante
 				bodyPlaceholder={'Tell Us Your Story...'}
 				content={body}
+				widgets={[]}
 				onUpdate={(editor) => setBody(editor.getHTML())}
 			/>
 			<Grid

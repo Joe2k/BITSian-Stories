@@ -3,5 +3,10 @@
   "version": "1.0.0",
   "main": "app.js",
   "author": "Joe2k <jonathansamuel2k@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.1"
+  }
 }
