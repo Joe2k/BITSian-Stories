@@ -11,8 +11,8 @@ import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: theme.spacing(8),
-		marginLeft: theme.spacing(24),
-		marginRight: theme.spacing(24),
+		marginLeft: '12%',
+		marginRight: '12%',
 	},
 }));
 
@@ -39,7 +39,7 @@ export const HomePage = () => {
 							<CardContent>
 								<Typography
 									gutterBottom
-									variant="h4"
+									variant="h6"
 									component="h3"
 								>
 									{story.title}
