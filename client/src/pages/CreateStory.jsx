@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Dante from 'dante3';
+import Dante, { ImageBlockConfig } from 'dante3';
 import { makeStyles, Button, Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
@@ -60,7 +60,20 @@ export const CreateStory = () => {
 			<Dante
 				bodyPlaceholder={'Tell Us Your Story...'}
 				content={body}
-				widgets={[]}
+				widgets={[
+					ImageBlockConfig({
+						options: {
+							upload_url: '/api/upload',
+							upload_callback: (ctx, img) => {
+								console.log(ctx);
+								alert('file uploaded: ' + ctx.data.url);
+							},
+							upload_error_callback: (ctx, img) => {
+								alert(ctx);
+							},
+						},
+					}),
+				]}
 				onUpdate={(editor) => setBody(editor.getHTML())}
 			/>
 

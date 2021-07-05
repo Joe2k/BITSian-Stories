@@ -16,6 +16,7 @@ require('./config/mongoDB')();
 require('./config/cloudinary')();
 
 app.use('/api/story', require('./routes/story'));
+app.use('/api/upload', require('./routes/upload'));
 
 /* Frontend Routes */
 const path = require('path');
