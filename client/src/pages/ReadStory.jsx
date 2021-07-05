@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: theme.spacing(8),
-		marginLeft: theme.spacing(24),
-		marginRight: theme.spacing(24),
+		marginLeft: '12%',
+		marginRight: '12%',
 	},
 }));
 

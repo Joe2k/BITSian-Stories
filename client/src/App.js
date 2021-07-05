@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import { HomePage } from './pages/HomePage';
 import { CreateStory } from './pages/CreateStory';
 import { ReadStory } from './pages/ReadStory';
+import './App.css';
 
 function App() {
 	return (
