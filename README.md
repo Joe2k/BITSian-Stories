@@ -10,3 +10,4 @@
 -   Add search feature with tags and titles
 -   Add unique url feature with full names
 -   Add linkedin and share link buttons
+-   Add category

@@ -12,6 +12,7 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -47,6 +48,16 @@ export const ReadStory = () => {
 	const [title, setTitle] = useState();
 	const [picture, setPicture] = useState();
 	let { id } = useParams();
+	const [open, setOpen] = React.useState(false);
+
+	const handleTooltipClose = () => {
+		setOpen(false);
+	};
+
+	const handleTooltipOpen = () => {
+		navigator.clipboard.writeText(window.location.href);
+		setOpen(true);
+	};
 
 	useEffect(() => {
 		axios.get(`/api/story/${id}`).then((res) => {
@@ -83,6 +94,9 @@ export const ReadStory = () => {
 									readOnly={true}
 									style={{ flexGrow: 1 }}
 								/>
+								<h2 className="css-1p0umon graf graf--h">
+									Product Management
+								</h2>
 								<Box className={classes.linkBox}>
 									<Link
 										href=""
@@ -100,14 +114,20 @@ export const ReadStory = () => {
 											></Icon>
 										</IconButton>
 									</Link>
-									<Link
-										href=""
-										target="_blank"
-										underline="none"
+									<Tooltip
+										PopperProps={{
+											disablePortal: true,
+										}}
+										onClose={handleTooltipClose}
+										open={open}
+										disableFocusListener
+										disableTouchListener
+										title="Copied Link to Clipboard"
 									>
 										<IconButton
 											color="primary"
 											component="span"
+											onClick={handleTooltipOpen}
 										>
 											<Icon
 												className="fas fa-share-alt"
@@ -115,7 +135,7 @@ export const ReadStory = () => {
 												fontSize="large"
 											></Icon>
 										</IconButton>
-									</Link>
+									</Tooltip>
 								</Box>
 							</div>
 						</Box>
