@@ -1,16 +1,24 @@
 const Story = require('../models/Story');
 const { convert } = require('html-to-text');
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
 exports.createStory = async (req, res, next) => {
 	try {
-		const story = await Story.create({
-			title: req.body.title,
-			body: req.body.body,
+		cloudinary.uploader.upload(req.file.path, async (error, result) => {
+			if (error) {
+				return next(error);
+			}
+			const story = await Story.create({
+				title: req.body.title,
+				body: req.body.body,
+				profilePic: result.url,
+			});
+
+			fs.unlinkSync(req.file.path);
+
+			return res.json(story._id);
 		});
-
-		//console.log(story);
-
-		return res.json(story._id);
 	} catch (err) {
 		return next(err);
 	}

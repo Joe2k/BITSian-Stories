@@ -8,19 +8,12 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// DB Config
-const db = process.env.MONGO_URI;
-
 /* Connect to MongoDB */
 require('./models/Story.js');
-mongoose
-	.connect(db, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-	})
-	.then(() => console.log('MongoDB successfully connected'))
-	.catch((err) => console.log(err));
+require('./config/mongoDB')();
+
+// Cloudinary Config
+require('./config/cloudinary')();
 
 app.use('/api/story', require('./routes/story'));
 

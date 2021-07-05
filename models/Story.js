@@ -8,6 +8,9 @@ var StorySchema = new Schema({
 	body: {
 		type: String,
 	},
+	profilePic: {
+		type: String,
+	},
 });
 
 module.exports = Story = mongoose.model('stories', StorySchema);

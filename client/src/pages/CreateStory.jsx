@@ -4,6 +4,7 @@ import { makeStyles, Button, Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import ImageUploader from 'react-images-upload';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -21,10 +22,17 @@ export const CreateStory = () => {
 		`<h1 class="graf graf--h"><span style="color: #000">A Catchy Title...</span></h1>`
 	);
 	const [error, setError] = useState('');
+	const [picture, setPicture] = useState();
 
 	const handleSubmit = () => {
-		if (title !== '' && body !== '') {
-			axios.post('/api/story', { title, body }).then((res) => {
+		if (title !== '' && body !== '' && picture) {
+			let formData = new FormData();
+
+			formData.append('body', body);
+			formData.append('title', title);
+			formData.append('picture', picture);
+
+			axios.post('/api/story', formData).then((res) => {
 				if (res.status === 200) {
 					history.push(`/story/${res.data}`);
 				} else {
@@ -32,8 +40,12 @@ export const CreateStory = () => {
 				}
 			});
 		} else {
-			setError('Please write your story and give a title');
+			setError('Please fill everything and add profile picture!');
 		}
+	};
+
+	const onDrop = (pictureFiles, pictureDataURLs) => {
+		setPicture(pictureFiles[0]);
 	};
 
 	return (
@@ -51,6 +63,17 @@ export const CreateStory = () => {
 				widgets={[]}
 				onUpdate={(editor) => setBody(editor.getHTML())}
 			/>
+
+			<ImageUploader
+				withIcon={true}
+				buttonText="Choose your profile picture"
+				onChange={onDrop}
+				imgExtension={['.jpg', '.png']}
+				maxFileSize={5242880}
+				singleImage={true}
+				withPreview={true}
+			/>
+
 			{error && (
 				<Grid
 					container
