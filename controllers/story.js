@@ -55,6 +55,8 @@ exports.getAllStories = async (req, res, next) => {
 				id: story._id,
 				title: convert(story.title),
 				body: bodyText,
+				profilePic: story.profilePic,
+				tags: story.tags,
 			});
 		});
 

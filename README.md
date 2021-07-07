@@ -14,3 +14,29 @@
 -   Dark theme?
 -   Add font customizations in theme file itself
 -   ~~Add other connection options and buttons~~
+
+Internships
+
+-   Core
+-   Tech
+-   Product/Business
+-   Finance
+
+Placements
+
+-   Core
+-   Tech
+-   Product/Business
+-   Finance
+
+Metrics
+Comments
+Search
+Recommendations
+Disclaimers - About us
+
+free - shutdown after 5 mins, no ssl certificate (http)
+
+Hosting - Heroku - 7 dollars/month, AWS - free only for a year(lot of time setup)
+
+Domain - www.bitsian-stories.com 1st year free 400 per year
