@@ -5,6 +5,11 @@ const fs = require('fs');
 
 exports.createStory = async (req, res, next) => {
 	try {
+		// Test Stuff
+		// console.log(JSON.parse(req.body.tags));
+		// fs.unlinkSync(req.file.path);
+		// return res.status(500);
+
 		cloudinary.uploader.upload(req.file.path, async (error, result) => {
 			if (error) {
 				return next(error);
@@ -13,6 +18,9 @@ exports.createStory = async (req, res, next) => {
 				title: req.body.title,
 				body: req.body.body,
 				profilePic: result.url,
+				category: req.body.category,
+				tags: JSON.parse(req.body.tags),
+				urls: JSON.parse(req.body.urls),
 			});
 
 			fs.unlinkSync(req.file.path);

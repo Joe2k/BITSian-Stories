@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import Dante, { ImageBlockConfig } from 'dante3';
-import { makeStyles, Button, Grid } from '@material-ui/core';
+import {
+	makeStyles,
+	Button,
+	Grid,
+	Input,
+	TextField,
+	InputLabel,
+	Select,
+	MenuItem,
+	FormHelperText,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
+import { WithContext as ReactTags } from 'react-tag-input';
+
+const KeyCodes = {
+	comma: 188,
+	enter: [10, 13],
+};
+
+const delimiters = [...KeyCodes.enter, KeyCodes.comma];
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,14 +41,26 @@ export const CreateStory = () => {
 	);
 	const [error, setError] = useState('');
 	const [picture, setPicture] = useState();
+	const [tags, setTags] = useState([]);
+	const [urls, setUrls] = useState({
+		linkedin: '',
+		facebook: '',
+		github: '',
+		instagram: '',
+		email: '',
+	});
+	const [category, setCategory] = useState();
 
 	const handleSubmit = () => {
-		if (title !== '' && body !== '' && picture) {
+		if (title !== '' && body !== '' && picture && category) {
 			let formData = new FormData();
 
 			formData.append('body', body);
 			formData.append('title', title);
 			formData.append('picture', picture);
+			formData.append('category', category);
+			formData.append('tags', JSON.stringify(tags));
+			formData.append('urls', JSON.stringify(urls));
 
 			axios.post('/api/story', formData).then((res) => {
 				if (res.status === 200) {
@@ -40,12 +70,24 @@ export const CreateStory = () => {
 				}
 			});
 		} else {
-			setError('Please fill everything and add profile picture!');
+			setError('Please fill everything necessary!');
 		}
 	};
 
 	const onDrop = (pictureFiles, pictureDataURLs) => {
 		setPicture(pictureFiles[0]);
+	};
+
+	const handleDelete = (i) => {
+		const { tags } = this.state;
+		setTags(tags.filter((tag, index) => index !== i));
+	};
+
+	const handleAddition = (tag) => {
+		setTags([...tags, tag]);
+	};
+	const handleChange = (e) => {
+		setUrls({ ...urls, [e.target.id]: e.target.value });
 	};
 
 	return (
@@ -86,6 +128,63 @@ export const CreateStory = () => {
 				singleImage={true}
 				withPreview={true}
 			/>
+			<InputLabel id="demo-simple-select-label">
+				Select Category *
+			</InputLabel>
+			<Select
+				labelId="demo-simple-select-label"
+				id="demo-simple-select"
+				value={category}
+				onChange={(e) => setCategory(e.target.value)}
+				fullWidth
+			>
+				<MenuItem value={'Product Management'}>
+					Product Management
+				</MenuItem>
+				<MenuItem value={'Core'}>Core</MenuItem>
+				<MenuItem value={'IT'}>IT</MenuItem>
+				<MenuItem value={'Electronics'}>Electronics</MenuItem>
+			</Select>
+			<FormHelperText>Required</FormHelperText>
+			<TextField
+				id="linkedin"
+				label="Linkedin URL (Optional)"
+				fullWidth
+				onChange={handleChange}
+			/>
+			<TextField
+				id="facebook"
+				label="Facebook URL (Optional)"
+				fullWidth
+				onChange={handleChange}
+			/>
+			<TextField
+				id="github"
+				label="GitHub URL (Optional)"
+				fullWidth
+				onChange={handleChange}
+			/>
+			<TextField
+				id="email"
+				label="Email Address (Optional)"
+				fullWidth
+				onChange={handleChange}
+			/>
+			<TextField
+				id="instagram"
+				label="Instagram URL (Optional)"
+				fullWidth
+				onChange={handleChange}
+			/>
+			<div style={{ marginTop: '20px' }}>
+				<ReactTags
+					tags={tags}
+					handleDelete={handleDelete}
+					handleAddition={handleAddition}
+					delimiters={delimiters}
+					allowDragDrop={false}
+				/>
+			</div>
 
 			{error && (
 				<Grid

@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '@material-ui/core/Link';
-import { Button } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import LogOut from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme) => ({
@@ -130,9 +130,28 @@ function Navbar() {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						<>
-							<Link href="/story/new" underline="none">
-								<Button color="secondary">New</Button>
+							<Link
+								href="https://github.com/Joe2k/BITSian-Stories"
+								target="_blank"
+								underline="none"
+							>
+								<IconButton color="secondary">
+									<Icon
+										className="fab fa-github"
+										color="secondary"
+									></Icon>
+								</IconButton>
 							</Link>
+
+							<Button color="secondary">
+								<Link
+									href="/story/new"
+									underline="none"
+									color="secondary"
+								>
+									New
+								</Link>
+							</Button>
 						</>
 					</div>
 					<div className={classes.sectionMobile}>

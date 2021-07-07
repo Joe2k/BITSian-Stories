@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Dante from 'dante3';
+import Dante, { darkTheme } from 'dante3';
 import {
 	makeStyles,
 	Button,
@@ -8,11 +8,14 @@ import {
 	Link,
 	IconButton,
 	Icon,
+	Chip,
+	Avatar,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
+import ConnectionButtons from '../components/ConnectionButtons/ConnectionButtons';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -34,10 +37,15 @@ const useStyles = makeStyles((theme) => ({
 			textAlign: 'center',
 		},
 	},
-	linkBox: {
+	tags: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		'& > *': {
+			margin: theme.spacing(0.5),
+		},
 		[theme.breakpoints.down('sm')]: {
-			display: 'flex',
 			justifyContent: 'center',
+			textAlign: 'center',
 		},
 	},
 }));
@@ -47,17 +55,10 @@ export const ReadStory = () => {
 	const [body, setBody] = useState();
 	const [title, setTitle] = useState();
 	const [picture, setPicture] = useState();
+	const [category, setCategory] = useState('');
+	const [urls, setUrls] = useState({});
+	const [tags, setTags] = useState([]);
 	let { id } = useParams();
-	const [open, setOpen] = React.useState(false);
-
-	const handleTooltipClose = () => {
-		setOpen(false);
-	};
-
-	const handleTooltipOpen = () => {
-		navigator.clipboard.writeText(window.location.href);
-		setOpen(true);
-	};
 
 	useEffect(() => {
 		axios.get(`/api/story/${id}`).then((res) => {
@@ -65,6 +66,9 @@ export const ReadStory = () => {
 			setBody(res.data.body);
 			setTitle(res.data.title);
 			setPicture(res.data.profilePic);
+			setCategory(res.data.category);
+			setUrls(res.data.urls);
+			setTags(res.data.tags);
 			document.title = res.data.title.replace(/<[^>]+>/g, '');
 		});
 	}, []);
@@ -94,49 +98,24 @@ export const ReadStory = () => {
 									readOnly={true}
 									style={{ flexGrow: 1 }}
 								/>
-								<h2 className="css-1p0umon graf graf--h">
-									Product Management
-								</h2>
-								<Box className={classes.linkBox}>
-									<Link
-										href=""
-										target="_blank"
-										underline="none"
-									>
-										<IconButton
-											color="primary"
-											component="span"
-										>
-											<Icon
-												className="fab fa-linkedin"
-												color="primary"
-												fontSize="large"
-											></Icon>
-										</IconButton>
-									</Link>
-									<Tooltip
-										PopperProps={{
-											disablePortal: true,
-										}}
-										onClose={handleTooltipClose}
-										open={open}
-										disableFocusListener
-										disableTouchListener
-										title="Copied Link to Clipboard"
-									>
-										<IconButton
-											color="primary"
-											component="span"
-											onClick={handleTooltipOpen}
-										>
-											<Icon
-												className="fas fa-share-alt"
-												color="primary"
-												fontSize="large"
-											></Icon>
-										</IconButton>
-									</Tooltip>
-								</Box>
+								{category && (
+									<h2 className="css-1p0umon graf graf--h">
+										{category}
+									</h2>
+								)}
+								<div className={classes.tags}>
+									{tags.map((tag) => (
+										<Chip
+											label={tag.text}
+											color="secondary"
+											variant="outlined"
+											clickable
+											style={{ fontSize: '16px' }}
+										/>
+									))}
+								</div>
+
+								<ConnectionButtons urls={urls} />
 							</div>
 						</Box>
 					)}
