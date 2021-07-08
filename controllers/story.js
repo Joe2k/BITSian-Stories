@@ -14,18 +14,24 @@ exports.createStory = async (req, res, next) => {
 			if (error) {
 				return next(error);
 			}
-			const story = await Story.create({
-				title: req.body.title,
-				body: req.body.body,
-				profilePic: result.url,
-				category: req.body.category,
-				tags: JSON.parse(req.body.tags),
-				urls: JSON.parse(req.body.urls),
-			});
+			try {
+				const story = await Story.create({
+					title: req.body.title,
+					body: req.body.body,
+					profilePic: result.url,
+					category: req.body.category,
+					tags: JSON.parse(req.body.tags),
+					urls: JSON.parse(req.body.urls),
+					uniqueName: req.body.uniqueName,
+				});
 
-			fs.unlinkSync(req.file.path);
+				fs.unlinkSync(req.file.path);
 
-			return res.json(story._id);
+				return res.json(story._id);
+			} catch (e) {
+				fs.unlinkSync(req.file.path);
+				return next(e);
+			}
 		});
 	} catch (err) {
 		return next(err);
@@ -35,6 +41,20 @@ exports.createStory = async (req, res, next) => {
 exports.getStoryById = async (req, res, next) => {
 	try {
 		const story = await Story.findById(req.params.id);
+		return res.json(story);
+	} catch (e) {
+		return next(e);
+	}
+};
+
+exports.getStoryByUniqueName = async (req, res, next) => {
+	try {
+		const story = await Story.findOne({
+			uniqueName: req.params.uniqueName,
+		});
+		if (!story) {
+			return next(e);
+		}
 		return res.json(story);
 	} catch (e) {
 		return next(e);
@@ -57,6 +77,7 @@ exports.getAllStories = async (req, res, next) => {
 				body: bodyText,
 				profilePic: story.profilePic,
 				tags: story.tags,
+				uniqueName: story.uniqueName,
 			});
 		});
 

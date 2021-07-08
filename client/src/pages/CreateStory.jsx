@@ -50,9 +50,16 @@ export const CreateStory = () => {
 		email: '',
 	});
 	const [category, setCategory] = useState();
+	const [uniqueName, setUniqueName] = useState();
 
 	const handleSubmit = () => {
-		if (title !== '' && body !== '' && picture && category) {
+		if (
+			title !== '' &&
+			body !== '' &&
+			picture &&
+			category &&
+			uniqueName !== ''
+		) {
 			let formData = new FormData();
 
 			formData.append('body', body);
@@ -61,14 +68,27 @@ export const CreateStory = () => {
 			formData.append('category', category);
 			formData.append('tags', JSON.stringify(tags));
 			formData.append('urls', JSON.stringify(urls));
+			formData.append('uniqueName', uniqueName);
 
-			axios.post('/api/story', formData).then((res) => {
-				if (res.status === 200) {
-					history.push(`/story/${res.data}`);
-				} else {
-					setError('Failed to create a new Story. Please try again!');
-				}
-			});
+			axios
+				.post('/api/story', formData)
+				.then((res) => {
+					if (res.status === 200) {
+						history.push(`/story/${res.data}`);
+					} else {
+						console.log(res);
+						setError(
+							'Failed to create a new Story. Please try again! \n' +
+								res.data
+						);
+					}
+				})
+				.catch((e) => {
+					console.log(e);
+					setError(
+						'Failed to create a new Story. Please try again or create new unique name!'
+					);
+				});
 		} else {
 			setError('Please fill everything necessary!');
 		}
@@ -138,14 +158,21 @@ export const CreateStory = () => {
 				onChange={(e) => setCategory(e.target.value)}
 				fullWidth
 			>
-				<MenuItem value={'Product Management'}>
-					Product Management
-				</MenuItem>
 				<MenuItem value={'Core'}>Core</MenuItem>
-				<MenuItem value={'IT'}>IT</MenuItem>
-				<MenuItem value={'Electronics'}>Electronics</MenuItem>
+				<MenuItem value={'Tech'}>Tech</MenuItem>
+				<MenuItem value={'Product'}>Product</MenuItem>
+				<MenuItem value={'Business'}>Business</MenuItem>
+				<MenuItem value={'Finance'}>Finance</MenuItem>
 			</Select>
 			<FormHelperText>Required</FormHelperText>
+			<TextField
+				id="unique_name"
+				label="Unique Name - Enter a unique name with no spaces which wil be used in the URL of the story"
+				fullWidth
+				placeholder="eg. jonathan-samuel"
+				onChange={(e) => setUniqueName(e.target.value)}
+				required
+			/>
 			<TextField
 				id="linkedin"
 				label="Linkedin URL (Optional)"

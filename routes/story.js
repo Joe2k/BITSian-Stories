@@ -4,6 +4,7 @@ const {
 	createStory,
 	getStoryById,
 	getAllStories,
+	getStoryByUniqueName,
 } = require('../controllers/story');
 
 const multer = require('multer');
@@ -21,6 +22,7 @@ const upload = multer({ storage });
 
 router.post('/', upload.single('picture'), createStory);
 router.get('/', getAllStories);
-router.get('/:id', getStoryById);
+// router.get('/:id', getStoryById);
+router.get('/:uniqueName', getStoryByUniqueName);
 
 module.exports = router;

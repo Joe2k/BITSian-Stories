@@ -51,15 +51,18 @@ export const HomePage = () => {
 				<Grid container direction="row" justify="center" spacing={4}>
 					{stories.map((story) => (
 						<Grid item xs={12} sm={6} md={4}>
-							<Link underline="none" href={'/story/' + story.id}>
+							<Link
+								underline="none"
+								href={'/story/' + story.uniqueName}
+							>
 								<Card style={{ maxWidth: '300' }}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
-											alt="Contemplative Reptile"
+											alt={story.title}
 											height="250"
 											image={story.profilePic}
-											title="Contemplative Reptile"
+											title={story.title}
 										/>
 										<CardContent>
 											<Typography

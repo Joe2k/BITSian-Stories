@@ -38,6 +38,10 @@ var StorySchema = new Schema({
 			},
 		},
 	],
+	uniqueName: {
+		type: String,
+		unique: true,
+	},
 });
 
 module.exports = Story = mongoose.model('stories', StorySchema);
