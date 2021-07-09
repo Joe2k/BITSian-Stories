@@ -12,6 +12,7 @@ exports.createStory = async (req, res, next) => {
 
 		cloudinary.uploader.upload(req.file.path, async (error, result) => {
 			if (error) {
+				console.log(error);
 				return next(error);
 			}
 			try {
@@ -27,13 +28,15 @@ exports.createStory = async (req, res, next) => {
 
 				fs.unlinkSync(req.file.path);
 
-				return res.json(story._id);
+				return res.json(story.uniqueName);
 			} catch (e) {
 				fs.unlinkSync(req.file.path);
+				console.log(e);
 				return next(e);
 			}
 		});
 	} catch (err) {
+		console.log(err);
 		return next(err);
 	}
 };

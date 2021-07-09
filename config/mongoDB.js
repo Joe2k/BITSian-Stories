@@ -10,6 +10,7 @@ const mongoDBSetup = () => {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: false,
+			useCreateIndex: true,
 		})
 		.then(() => console.log('MongoDB successfully connected'))
 		.catch((err) => console.log(err));
