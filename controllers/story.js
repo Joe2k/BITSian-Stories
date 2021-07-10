@@ -89,3 +89,29 @@ exports.getAllStories = async (req, res, next) => {
 		return next(e);
 	}
 };
+
+exports.getStroiesByCategory = async (req, res, next) => {
+	try {
+		const stories = await Story.find({ category: req.params.category });
+		let newStories = [];
+
+		stories.forEach((story) => {
+			let bodyText = convert(story.body);
+			bodyText = bodyText.split(' ');
+			bodyText = bodyText.slice(0, Math.min(20, bodyText.length));
+			bodyText = bodyText.join(' ');
+			newStories.push({
+				id: story._id,
+				title: convert(story.title),
+				body: bodyText,
+				profilePic: story.profilePic,
+				tags: story.tags,
+				uniqueName: story.uniqueName,
+			});
+		});
+
+		return res.json(newStories);
+	} catch (e) {
+		return next(e);
+	}
+};

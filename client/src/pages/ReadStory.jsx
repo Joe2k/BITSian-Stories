@@ -10,16 +10,20 @@ import {
 	Icon,
 	Chip,
 	Avatar,
+	Typography,
+	withStyles,
+	emphasize,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import ConnectionButtons from '../components/ConnectionButtons/ConnectionButtons';
+import ReadStoryBreadcrumbs from '../components/Breadcrumbs/ReadStoryBreadcrumbs';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		margin: theme.spacing(8),
+		margin: theme.spacing(4),
 		marginLeft: '12%',
 		marginRight: '12%',
 		flexGrow: 1,
@@ -72,9 +76,9 @@ export const ReadStory = () => {
 			document.title = res.data.title.replace(/<[^>]+>/g, '');
 		});
 	}, []);
-
 	return (
 		<div className={classes.root}>
+			<ReadStoryBreadcrumbs title={title} category={category} />
 			<Grid container spacing={3} style={{ marginBottom: '30px' }}>
 				<Grid item sm={4} xs={12}>
 					{picture && (
@@ -98,11 +102,19 @@ export const ReadStory = () => {
 									readOnly={true}
 									style={{ flexGrow: 1 }}
 								/>
-								{category && (
-									<h2 className="css-1p0umon graf graf--h">
-										{category}
-									</h2>
-								)}
+								<Link
+									underline="none"
+									href={'/category/' + category}
+								>
+									<div>
+										{category && (
+											<h2 className="css-1p0umon graf graf--h">
+												{category}
+											</h2>
+										)}
+									</div>
+								</Link>
+
 								<div className={classes.tags}>
 									{tags.map((tag) => (
 										<Chip

@@ -10,6 +10,7 @@ import { HomePage } from './pages/HomePage';
 import { CreateStory } from './pages/CreateStory';
 import { ReadStory } from './pages/ReadStory';
 import './App.css';
+import { CategoryPage } from './pages/CategoryPage';
 
 function App() {
 	return (
@@ -21,6 +22,9 @@ function App() {
 				</Route>
 				<Route path="/story/:id">
 					<ReadStory />
+				</Route>
+				<Route path="/category/:category">
+					<CategoryPage />
 				</Route>
 				<Route exact path="/">
 					<HomePage />

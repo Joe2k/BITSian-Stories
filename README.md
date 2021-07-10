@@ -15,6 +15,7 @@
 -   Add font customizations in theme file itself
 -   ~~Add other connection options and buttons~~
 -   Add social media share features
+-   Add static rendering or pass meta data from server
 
 Internships
 
