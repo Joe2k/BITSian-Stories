@@ -6,6 +6,7 @@ const {
 	getAllStories,
 	getStoryByUniqueName,
 	getStroiesByCategory,
+	updateStory,
 } = require('../controllers/story');
 
 const multer = require('multer');
@@ -26,5 +27,6 @@ router.get('/', getAllStories);
 router.get('/category/:category', getStroiesByCategory);
 // router.get('/:id', getStoryById);
 router.get('/:uniqueName', getStoryByUniqueName);
+router.put('/:uniqueName', updateStory);
 
 module.exports = router;

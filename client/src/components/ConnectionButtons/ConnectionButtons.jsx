@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ConnectionButtons = ({ urls }) => {
+const ConnectionButtons = ({ urls, id }) => {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
 
@@ -113,6 +113,16 @@ const ConnectionButtons = ({ urls }) => {
 					></Icon>
 				</IconButton>
 			</Tooltip>
+
+			<Link href={'/story/' + id + '/edit'} underline="none">
+				<IconButton color="primary" component="span">
+					<Icon
+						className="fas fa-pen"
+						color="primary"
+						fontSize="large"
+					></Icon>
+				</IconButton>
+			</Link>
 		</Box>
 	);
 };

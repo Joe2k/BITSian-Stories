@@ -41,6 +41,26 @@ exports.createStory = async (req, res, next) => {
 	}
 };
 
+exports.updateStory = async (req, res, next) => {
+	Story.findOneAndUpdate(
+		{ uniqueName: req.params.uniqueName },
+		{
+			title: req.body.title,
+			body: req.body.body,
+			category: req.body.category,
+			tags: req.body.tags,
+			urls: req.body.urls,
+		},
+		(err, doc) => {
+			if (err) {
+				return next(err);
+			}
+			console.log(doc);
+			return res.json(doc.uniqueName);
+		}
+	);
+};
+
 exports.getStoryById = async (req, res, next) => {
 	try {
 		const story = await Story.findById(req.params.id);

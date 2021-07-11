@@ -11,6 +11,7 @@ import { CreateStory } from './pages/CreateStory';
 import { ReadStory } from './pages/ReadStory';
 import './App.css';
 import { CategoryPage } from './pages/CategoryPage';
+import { UpdatePage } from './pages/UpdatePage';
 
 function App() {
 	return (
@@ -19,6 +20,9 @@ function App() {
 			<Switch>
 				<Route exact path="/story/new">
 					<CreateStory />
+				</Route>
+				<Route path="/story/:uniqueName/edit">
+					<UpdatePage />
 				</Route>
 				<Route path="/story/:id">
 					<ReadStory />

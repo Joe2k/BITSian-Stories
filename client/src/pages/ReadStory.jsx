@@ -155,7 +155,7 @@ export const ReadStory = () => {
 									))}
 								</div>
 
-								<ConnectionButtons urls={urls} />
+								<ConnectionButtons id={id} urls={urls} />
 							</div>
 						</Box>
 					)}

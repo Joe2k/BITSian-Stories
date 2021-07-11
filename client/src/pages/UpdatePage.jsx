@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import { WithContext as ReactTags } from 'react-tag-input';
 
@@ -32,15 +32,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const CreateStory = () => {
+export const UpdatePage = () => {
 	const classes = useStyles();
 	let history = useHistory();
 	const [body, setBody] = useState('');
-	const [title, setTitle] = useState(
-		`<h1 class="graf graf--h"><span style="color: #000">A Catchy Title...</span></h1>`
-	);
+	const [title, setTitle] = useState('');
 	const [error, setError] = useState('');
-	const [picture, setPicture] = useState();
 	const [tags, setTags] = useState([]);
 	const [urls, setUrls] = useState({
 		linkedin: '',
@@ -50,28 +47,36 @@ export const CreateStory = () => {
 		email: '',
 	});
 	const [category, setCategory] = useState();
-	const [uniqueName, setUniqueName] = useState();
+	let { uniqueName } = useParams();
+
+	useEffect(() => {
+		axios.get(`/api/story/${uniqueName}`).then((res) => {
+			console.log(res.data);
+			setBody(res.data.body);
+			setTitle(res.data.title);
+			setCategory(res.data.category);
+			setUrls(res.data.urls);
+
+			res.data.tags.forEach((tag, i, arr) => {
+				arr[i].id = tag.text;
+				arr[i].key = tag.text;
+			});
+			setTags(res.data.tags);
+
+			document.title = res.data.title.replace(/<[^>]+>/g, '');
+		});
+	}, []);
 
 	const handleSubmit = () => {
-		if (
-			title !== '' &&
-			body !== '' &&
-			picture &&
-			category &&
-			uniqueName !== ''
-		) {
-			let formData = new FormData();
-
-			formData.append('body', body);
-			formData.append('title', title);
-			formData.append('picture', picture);
-			formData.append('category', category);
-			formData.append('tags', JSON.stringify(tags));
-			formData.append('urls', JSON.stringify(urls));
-			formData.append('uniqueName', uniqueName);
-
+		if (title !== '' && body !== '' && category && uniqueName !== '') {
 			axios
-				.post('/api/story', formData)
+				.put('/api/story/' + uniqueName, {
+					body,
+					title,
+					category,
+					urls,
+					tags,
+				})
 				.then((res) => {
 					if (res.status === 200) {
 						history.push(`/story/${res.data}`);
@@ -94,10 +99,6 @@ export const CreateStory = () => {
 		}
 	};
 
-	const onDrop = (pictureFiles, pictureDataURLs) => {
-		setPicture(pictureFiles[0]);
-	};
-
 	const handleDelete = (i) => {
 		setTags(tags.filter((tag, index) => index !== i));
 	};
@@ -111,95 +112,91 @@ export const CreateStory = () => {
 
 	return (
 		<div className={classes.root}>
-			<Dante
-				bodyPlaceholder={'A Catchy Title...'}
-				content={title}
-				onUpdate={(editor) => {
-					setTitle(editor.getHTML());
-				}}
-			/>
-			<Dante
-				bodyPlaceholder={'Tell Us Your Story...'}
-				content={body}
-				widgets={[
-					ImageBlockConfig({
-						options: {
-							upload_url: '/api/upload',
-							upload_callback: (ctx, img) => {
-								console.log(ctx);
-								alert('file uploaded: ' + ctx.data.url);
-							},
-							upload_error_callback: (ctx, img) => {
-								alert(ctx);
-							},
-						},
-					}),
-				]}
-				onUpdate={(editor) => setBody(editor.getHTML())}
-			/>
+			{title && (
+				<Dante
+					bodyPlaceholder={'A Catchy Title...'}
+					content={title}
+					onUpdate={(editor) => {
+						setTitle(editor.getHTML());
+					}}
+				/>
+			)}
 
-			<ImageUploader
-				withIcon={true}
-				buttonText="Choose your profile picture"
-				onChange={onDrop}
-				imgExtension={['.jpg', '.png']}
-				maxFileSize={5242880}
-				singleImage={true}
-				withPreview={true}
-			/>
+			{body && (
+				<Dante
+					bodyPlaceholder={'Tell Us Your Story...'}
+					content={body}
+					widgets={[
+						ImageBlockConfig({
+							options: {
+								upload_url: '/api/upload',
+								upload_callback: (ctx, img) => {
+									console.log(ctx);
+									alert('file uploaded: ' + ctx.data.url);
+								},
+								upload_error_callback: (ctx, img) => {
+									alert(ctx);
+								},
+							},
+						}),
+					]}
+					onUpdate={(editor) => setBody(editor.getHTML())}
+				/>
+			)}
+
 			<InputLabel id="demo-simple-select-label">
 				Select Category *
 			</InputLabel>
-			<Select
-				labelId="demo-simple-select-label"
-				id="demo-simple-select"
-				value={category}
-				onChange={(e) => setCategory(e.target.value)}
-				fullWidth
-			>
-				<MenuItem value={'Core'}>Core</MenuItem>
-				<MenuItem value={'Tech'}>Tech</MenuItem>
-				<MenuItem value={'Product'}>Product</MenuItem>
-				<MenuItem value={'Business'}>Business</MenuItem>
-				<MenuItem value={'Finance'}>Finance</MenuItem>
-			</Select>
+			{category && (
+				<Select
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					value={category}
+					onChange={(e) => setCategory(e.target.value)}
+					fullWidth
+				>
+					<MenuItem value={'Core'}>Core</MenuItem>
+					<MenuItem value={'Tech'}>Tech</MenuItem>
+					<MenuItem value={'Product'}>Product</MenuItem>
+					<MenuItem value={'Business'}>Business</MenuItem>
+					<MenuItem value={'Finance'}>Finance</MenuItem>
+				</Select>
+			)}
+
 			<FormHelperText>Required</FormHelperText>
-			<TextField
-				id="unique_name"
-				label="Unique Name - Enter a unique name with no spaces which wil be used in the URL of the story"
-				fullWidth
-				placeholder="eg. jonathan-samuel"
-				onChange={(e) => setUniqueName(e.target.value)}
-				required
-			/>
 			<TextField
 				id="linkedin"
 				label="Linkedin URL (Optional)"
 				fullWidth
+				value={urls.linkedin}
 				onChange={handleChange}
 			/>
 			<TextField
 				id="facebook"
 				label="Facebook URL (Optional)"
 				fullWidth
+				value={urls.facebook}
 				onChange={handleChange}
 			/>
 			<TextField
 				id="github"
 				label="GitHub URL (Optional)"
 				fullWidth
+				value={urls.github}
 				onChange={handleChange}
 			/>
 			<TextField
 				id="email"
 				label="Email Address (Optional)"
 				fullWidth
+				value={urls.email}
 				onChange={handleChange}
 			/>
 			<TextField
 				id="instagram"
 				label="Instagram URL (Optional)"
 				fullWidth
+				value={urls.instagram}
 				onChange={handleChange}
 			/>
 			<div style={{ marginTop: '20px' }}>
@@ -207,7 +204,6 @@ export const CreateStory = () => {
 					tags={tags}
 					handleDelete={handleDelete}
 					handleAddition={handleAddition}
-					delimiters={delimiters}
 					allowDragDrop={false}
 				/>
 			</div>
@@ -231,9 +227,11 @@ export const CreateStory = () => {
 				justify="center"
 				style={{ marginTop: '20px' }}
 			>
-				<Button variant="outlined" onClick={handleSubmit}>
-					Publish
-				</Button>
+				{category && (
+					<Button variant="outlined" onClick={handleSubmit}>
+						Update
+					</Button>
+				)}
 			</Grid>
 		</div>
 	);
