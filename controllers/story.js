@@ -58,7 +58,34 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 		if (!story) {
 			return next(e);
 		}
-		return res.json(story);
+
+		let recommendations = await Story.find({
+			uniqueName: { $ne: story.uniqueName },
+			category: story.category,
+		});
+
+		let newStories = [];
+
+		recommendations.forEach((story) => {
+			let bodyText = convert(story.body);
+			bodyText = bodyText.split(' ');
+			bodyText = bodyText.slice(0, Math.min(20, bodyText.length));
+			bodyText = bodyText.join(' ');
+			newStories.push({
+				id: story._id,
+				title: convert(story.title),
+				body: bodyText,
+				profilePic: story.profilePic,
+				tags: story.tags,
+				uniqueName: story.uniqueName,
+				category: story.category,
+			});
+		});
+
+		recommendations = getRandom(newStories, 3);
+		//console.log({ ...story, recommendations });
+
+		return res.json({ ...story._doc, recommendations });
 	} catch (e) {
 		return next(e);
 	}
@@ -116,3 +143,17 @@ exports.getStroiesByCategory = async (req, res, next) => {
 		return next(e);
 	}
 };
+
+function getRandom(arr, n) {
+	var result = new Array(n),
+		len = arr.length,
+		taken = new Array(len);
+	if (n > len)
+		throw new RangeError('getRandom: more elements taken than available');
+	while (n--) {
+		var x = Math.floor(Math.random() * len);
+		result[n] = arr[x in taken ? taken[x] : x];
+		taken[x] = --len in taken ? taken[len] : len;
+	}
+	return result;
+}

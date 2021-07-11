@@ -31,11 +31,11 @@ Placements
 -   Product/Business
 -   Finance
 
-Metrics
-Comments
-Search
-Recommendations
-Disclaimers - About us
+-   Metrics
+-   Comments
+-   ~~Search~~
+-   Recommendations
+-   Disclaimers - About us
 
 free - shutdown after 5 mins, no ssl certificate (http)
 

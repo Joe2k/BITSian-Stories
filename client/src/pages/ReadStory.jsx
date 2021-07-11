@@ -13,6 +13,11 @@ import {
 	Typography,
 	withStyles,
 	emphasize,
+	CardMedia,
+	CardActionArea,
+	CardContent,
+	Card,
+	Divider,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
@@ -52,17 +57,28 @@ const useStyles = makeStyles((theme) => ({
 			textAlign: 'center',
 		},
 	},
+	tags2: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		'& > *': {
+			margin: theme.spacing(0.5),
+		},
+		justifyContent: 'center',
+		textAlign: 'center',
+		marginBottom: '10px',
+	},
 }));
 
 export const ReadStory = () => {
 	const classes = useStyles();
-	const [body, setBody] = useState();
-	const [title, setTitle] = useState();
+	const [body, setBody] = useState('');
+	const [title, setTitle] = useState('');
 	const [picture, setPicture] = useState();
 	const [category, setCategory] = useState('');
 	const [urls, setUrls] = useState({});
 	const [tags, setTags] = useState([]);
 	let { id } = useParams();
+	const [recommendations, setRecommendations] = useState([]);
 
 	useEffect(() => {
 		axios.get(`/api/story/${id}`).then((res) => {
@@ -73,6 +89,8 @@ export const ReadStory = () => {
 			setCategory(res.data.category);
 			setUrls(res.data.urls);
 			setTags(res.data.tags);
+
+			setRecommendations(res.data.recommendations);
 			document.title = res.data.title.replace(/<[^>]+>/g, '');
 		});
 	}, []);
@@ -152,6 +170,99 @@ export const ReadStory = () => {
 					readOnly={true}
 				/>
 			)}
+			<Divider
+				variant="middle"
+				style={{
+					marginTop: '40px',
+					marginBottom: '20px',
+				}}
+			/>
+
+			<Grid container direction="row" justify="center" spacing={4}>
+				{recommendations.length > 0 && (
+					<Grid item xs={12}>
+						<Typography variant="h4">
+							{'More on ' + category}
+						</Typography>
+					</Grid>
+				)}
+
+				{recommendations.length > 0 &&
+					recommendations.map((story) => (
+						<Grid item xs={12} sm={6} md={4}>
+							<Link
+								underline="none"
+								href={'/story/' + story.uniqueName}
+							>
+								<Card style={{ maxWidth: '300' }}>
+									<CardActionArea>
+										<CardMedia
+											component="img"
+											alt={story.title}
+											height="250"
+											image={story.profilePic}
+											title={story.title}
+										/>
+										<CardContent>
+											<Typography
+												gutterBottom
+												variant="h6"
+												component="h2"
+												align="center"
+												style={{ marginBottom: 0 }}
+											>
+												{story.title}
+											</Typography>
+											<div className={classes.tags2}>
+												{story.tags &&
+													story.tags
+														.slice(
+															0,
+															Math.min(
+																3,
+																story.tags
+																	.length
+															)
+														)
+														.map((tag) => (
+															<Link
+																underline="none"
+																href={
+																	'/category/' +
+																	story.category +
+																	'?search=' +
+																	tag.text
+																}
+															>
+																<Chip
+																	label={
+																		tag.text
+																	}
+																	color="secondary"
+																	variant="outlined"
+																	clickable
+																	style={{
+																		fontSize:
+																			'14px',
+																	}}
+																/>
+															</Link>
+														))}
+											</div>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												{story.body}
+											</Typography>
+										</CardContent>
+									</CardActionArea>
+								</Card>
+							</Link>
+						</Grid>
+					))}
+			</Grid>
 		</div>
 	);
 };
