@@ -7,6 +7,8 @@ import {
 	Typography,
 	Link,
 	Chip,
+	Icon,
+	Divider,
 } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -48,7 +50,219 @@ export const HomePage = () => {
 	return (
 		<Grid container className={classes.root} spacing={2}>
 			<Grid item xs={12}>
-				<Grid container direction="row" justify="center" spacing={4}>
+				<Typography
+					variant="h2"
+					align="center"
+					style={{ fontWeight: 'bold' }}
+				>
+					BITSian Stories
+				</Typography>
+				<Typography
+					variant="body1"
+					color="textSecondary"
+					align="center"
+					style={{
+						fontSize: '20px',
+						marginTop: '20px',
+					}}
+				>
+					<p style={{ fontStyle: 'italic' }}>
+						“Knowing is Not Enough, We must apply. Willing is not
+						enough, we must do”
+					</p>
+					With this initiative, we aim to make career options and
+					procedures more transparent for our students to make the
+					most of them. Even the most talented people need to be aware
+					of the options available for them.
+				</Typography>
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					spacing={4}
+					style={{ marginTop: '20px' }}
+				>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
+									>
+										<Icon
+											className="fas fa-laptop-code"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Tech
+									</Typography>
+									<Typography
+										variant="body2"
+										color="textSecondary"
+										component="p"
+									>
+										Get to know more about IT companies and
+										their work culture!
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
+									>
+										<Icon
+											className="fas fa-cogs"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Core
+									</Typography>
+									<Typography
+										variant="body2"
+										color="textSecondary"
+										component="p"
+									>
+										Get to know more about Core companies
+										and their work culture!
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
+									>
+										<Icon
+											className="fas fa-percentage"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Finance
+									</Typography>
+									<Typography
+										variant="body2"
+										color="textSecondary"
+										component="p"
+									>
+										Get to know more about Finance companies
+										and their work culture!
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
+									>
+										<Icon
+											className="fas fa-flask"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Research
+									</Typography>
+									<Typography
+										variant="body2"
+										color="textSecondary"
+										component="p"
+									>
+										Get to know more about Research Roles
+										and their work culture!
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+				</Grid>
+			</Grid>
+			<Grid item xs={12}>
+				<Divider
+					variant="middle"
+					style={{
+						marginTop: '40px',
+						marginBottom: '20px',
+					}}
+				/>
+			</Grid>
+
+			<Grid item xs={12}>
+				<Typography variant="h4">Latest Stories</Typography>
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					spacing={4}
+					style={{ marginTop: '20px' }}
+				>
 					{stories.map((story) => (
 						<Grid item xs={12} sm={6} md={4}>
 							<Link

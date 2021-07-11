@@ -34,7 +34,7 @@ Placements
 -   Metrics
 -   Comments
 -   ~~Search~~
--   Recommendations
+-   ~~Recommendations~~
 -   Disclaimers - About us
 
 free - shutdown after 5 mins, no ssl certificate (http)

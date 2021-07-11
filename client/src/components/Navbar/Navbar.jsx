@@ -34,8 +34,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	sectionDesktop: {
 		display: 'none',
+
 		[theme.breakpoints.up('md')]: {
 			display: 'flex',
+			alignItems: 'center',
 		},
 	},
 	sectionMobile: {
@@ -131,6 +133,42 @@ function Navbar() {
 					<div className={classes.sectionDesktop}>
 						<>
 							<Link
+								href="/category/tech"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Tech</Button>
+							</Link>
+							<Link
+								href="/category/core"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Core</Button>
+							</Link>
+							<Link
+								href="/category/finance"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Finance</Button>
+							</Link>
+							<Link
+								href="/category/research"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Research</Button>
+							</Link>
+
+							<Link
+								href="/story/new"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">New</Button>
+							</Link>
+							<Link
 								href="https://github.com/Joe2k/BITSian-Stories"
 								target="_blank"
 								underline="none"
@@ -142,16 +180,6 @@ function Navbar() {
 									></Icon>
 								</IconButton>
 							</Link>
-
-							<Button color="secondary">
-								<Link
-									href="/story/new"
-									underline="none"
-									color="secondary"
-								>
-									New
-								</Link>
-							</Button>
 						</>
 					</div>
 					<div className={classes.sectionMobile}>
