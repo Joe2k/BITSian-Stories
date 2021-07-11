@@ -86,16 +86,28 @@ export const HomePage = () => {
 															)
 														)
 														.map((tag) => (
-															<Chip
-																label={tag.text}
-																color="secondary"
-																variant="outlined"
-																clickable
-																style={{
-																	fontSize:
-																		'14px',
-																}}
-															/>
+															<Link
+																underline="none"
+																href={
+																	'/category/' +
+																	story.category +
+																	'?search=' +
+																	tag.text
+																}
+															>
+																<Chip
+																	label={
+																		tag.text
+																	}
+																	color="secondary"
+																	variant="outlined"
+																	clickable
+																	style={{
+																		fontSize:
+																			'14px',
+																	}}
+																/>
+															</Link>
 														))}
 											</div>
 											<Typography

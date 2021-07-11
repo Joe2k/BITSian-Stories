@@ -18,10 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const CategoryPageBreadcrumbs = ({ category }) => {
 	const classes = useStyles();
 	return (
-		<Breadcrumbs
-			aria-label="breadcrumb"
-			style={{ marginBottom: '40px', lineHeight: '2' }}
-		>
+		<Breadcrumbs aria-label="breadcrumb" style={{ lineHeight: '2' }}>
 			<StyledBreadcrumb
 				component="a"
 				href="/"

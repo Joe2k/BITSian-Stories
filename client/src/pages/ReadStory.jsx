@@ -117,13 +117,23 @@ export const ReadStory = () => {
 
 								<div className={classes.tags}>
 									{tags.map((tag) => (
-										<Chip
-											label={tag.text}
-											color="secondary"
-											variant="outlined"
-											clickable
-											style={{ fontSize: '16px' }}
-										/>
+										<Link
+											underline="none"
+											href={
+												'/category/' +
+												category +
+												'?search=' +
+												tag.text
+											}
+										>
+											<Chip
+												label={tag.text}
+												color="secondary"
+												variant="outlined"
+												clickable
+												style={{ fontSize: '16px' }}
+											/>
+										</Link>
 									))}
 								</div>
 

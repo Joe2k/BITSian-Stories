@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Grid, Typography, Link, Chip } from '@material-ui/core';
+import {
+	makeStyles,
+	Grid,
+	Typography,
+	Link,
+	Chip,
+	CircularProgress,
+} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import CategoryPageBreadcrumbs from '../components/Breadcrumbs/CategoryPageBreadcrumbs';
+import SearchBar from 'material-ui-search-bar';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -25,11 +33,31 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		marginBottom: '10px',
 	},
+	search: {
+		width: '60%',
+
+		[theme.breakpoints.down('md')]: {
+			width: '80%',
+			[theme.breakpoints.down('sm')]: {
+				width: '100%',
+			},
+		},
+	},
 }));
+
+function useQuery() {
+	return new URLSearchParams(useLocation().search);
+}
 
 export const CategoryPage = () => {
 	const classes = useStyles();
+	const query = useQuery();
+
 	const [stories, setStories] = useState([]);
+	const [mainStories, setMainStories] = useState([]);
+	const [search, setSearch] = useState('');
+	const [localSearch, setLocalSearch] = useState('');
+	const [fadeAccordion, setFadeAccordion] = React.useState(true);
 	let { category } = useParams();
 
 	useEffect(() => {
@@ -41,77 +69,149 @@ export const CategoryPage = () => {
 			)
 			.then((res) => {
 				console.log(res.data);
+				let data = res.data;
+				data.forEach((d, i, arr) => {
+					let tagSearch = '';
+					d.tags.forEach((tag) => {
+						tagSearch += tag.text.toLowerCase() + ' ';
+					});
+					arr[i].search = tagSearch + ' ' + d.title.toLowerCase();
+				});
 				setStories(res.data);
+				setMainStories(res.data);
+				const searchParam = query.get('search');
+				if (searchParam) {
+					setSearch(searchParam);
+					setLocalSearch(searchParam);
+					query.delete('search');
+				}
 			});
 	}, []);
 
+	useEffect(() => {
+		setStories(
+			mainStories.filter((d) => d.search.includes(search.toLowerCase()))
+		);
+	}, [search]);
+
+	React.useEffect(() => {
+		const delayTimeout = setTimeout(() => {
+			setSearch(localSearch);
+			setFadeAccordion(true);
+		}, 1000);
+
+		return () => clearTimeout(delayTimeout);
+	}, [localSearch]);
+
 	return (
 		<Grid container className={classes.root} spacing={2}>
-			<CategoryPageBreadcrumbs category={category} />
+			<Grid item xs={12}>
+				<CategoryPageBreadcrumbs category={category} />
+			</Grid>
+			<Grid
+				item
+				xs={12}
+				style={{
+					marginBottom: '20px',
+				}}
+			>
+				<Grid container direction="row" justify="center">
+					<SearchBar
+						className={classes.search}
+						value={localSearch}
+						onChange={(newValue) => {
+							setFadeAccordion(false);
+							setLocalSearch(newValue);
+						}}
+						onCancelSearch={() => {
+							setFadeAccordion(false);
+							setLocalSearch('');
+						}}
+					/>
+				</Grid>
+			</Grid>
+
 			<Grid item xs={12}>
 				<Grid container direction="row" justify="center" spacing={4}>
-					{stories.map((story) => (
-						<Grid item xs={12} sm={6} md={4}>
-							<Link
-								underline="none"
-								href={'/story/' + story.uniqueName}
-							>
-								<Card style={{ maxWidth: '300' }}>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt={story.title}
-											height="250"
-											image={story.profilePic}
-											title={story.title}
-										/>
-										<CardContent>
-											<Typography
-												gutterBottom
-												variant="h6"
-												component="h2"
-												align="center"
-												style={{ marginBottom: 0 }}
-											>
-												{story.title}
-											</Typography>
-											<div className={classes.tags}>
-												{story.tags &&
-													story.tags
-														.slice(
-															0,
-															Math.min(
-																3,
-																story.tags
-																	.length
+					{!fadeAccordion && (
+						<CircularProgress style={{ marginTop: '10%' }} />
+					)}
+
+					{fadeAccordion &&
+						stories.map((story) => (
+							<Grid item xs={12} sm={6} md={4}>
+								<Link
+									underline="none"
+									href={'/story/' + story.uniqueName}
+								>
+									<Card style={{ maxWidth: '300' }}>
+										<CardActionArea>
+											<CardMedia
+												component="img"
+												alt={story.title}
+												height="250"
+												image={story.profilePic}
+												title={story.title}
+											/>
+											<CardContent>
+												<Typography
+													gutterBottom
+													variant="h6"
+													component="h2"
+													align="center"
+													style={{ marginBottom: 0 }}
+												>
+													{story.title}
+												</Typography>
+												<div className={classes.tags}>
+													{story.tags &&
+														story.tags
+															.slice(
+																0,
+																Math.min(
+																	3,
+																	story.tags
+																		.length
+																)
 															)
-														)
-														.map((tag) => (
-															<Chip
-																label={tag.text}
-																color="secondary"
-																variant="outlined"
-																clickable
-																style={{
-																	fontSize:
-																		'14px',
-																}}
-															/>
-														))}
-											</div>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												{story.body}
-											</Typography>
-										</CardContent>
-									</CardActionArea>
-								</Card>
-							</Link>
-						</Grid>
-					))}
+															.map((tag) => (
+																<Link
+																	underline="none"
+																	href={
+																		'/category/' +
+																		category +
+																		'?search=' +
+																		tag.text
+																	}
+																>
+																	<Chip
+																		label={
+																			tag.text
+																		}
+																		color="secondary"
+																		variant="outlined"
+																		clickable
+																		style={{
+																			fontSize:
+																				'14px',
+																		}}
+																	/>
+																</Link>
+															))}
+												</div>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													{story.body}
+												</Typography>
+											</CardContent>
+										</CardActionArea>
+									</Card>
+								</Link>
+							</Grid>
+						))}
 				</Grid>
 			</Grid>
 		</Grid>

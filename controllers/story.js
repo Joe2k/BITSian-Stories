@@ -81,6 +81,7 @@ exports.getAllStories = async (req, res, next) => {
 				profilePic: story.profilePic,
 				tags: story.tags,
 				uniqueName: story.uniqueName,
+				category: story.category,
 			});
 		});
 
