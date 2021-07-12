@@ -13,8 +13,29 @@ import './App.css';
 import { CategoryPage } from './pages/CategoryPage';
 import { UpdatePage } from './pages/UpdatePage';
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import {
+	Backdrop,
+	CircularProgress,
+	Fade,
+	makeStyles,
+} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+	backdrop: {
+		zIndex: theme.zIndex.drawer + 1,
+		color: '#121212',
+	},
+}));
 
 function App() {
+	const [loading, setLoading] = React.useState(true);
+	const classes = useStyles();
+
+	React.useEffect(() => {
+		window.addEventListener('load', () => {
+			setLoading(false);
+		});
+	}, []);
 	return (
 		<Scrollbars
 			style={{
@@ -32,6 +53,11 @@ function App() {
 				/>
 			)}
 		>
+			<Fade in={loading}>
+				<Backdrop className={classes.backdrop} open={loading}>
+					<CircularProgress color="primary" />
+				</Backdrop>
+			</Fade>
 			<Router>
 				<Navbar />
 				<Switch>
