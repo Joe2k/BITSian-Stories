@@ -16,6 +16,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import { WithContext as ReactTags } from 'react-tag-input';
+import defaultTheme from '../themes/default';
+import darkTheme from '../themes/dark';
+import { CustomThemeContext } from '../context/CustomThemeProvider';
 
 const KeyCodes = {
 	comma: 188,
@@ -34,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const CreateStory = () => {
 	const classes = useStyles();
+	const { currentTheme } = React.useContext(CustomThemeContext);
 	let history = useHistory();
 	const [body, setBody] = useState('');
 	const [title, setTitle] = useState(
@@ -117,6 +121,7 @@ export const CreateStory = () => {
 				onUpdate={(editor) => {
 					setTitle(editor.getHTML());
 				}}
+				theme={currentTheme === 'light' ? defaultTheme : darkTheme}
 			/>
 			<Dante
 				bodyPlaceholder={'Tell Us Your Story...'}
@@ -136,6 +141,7 @@ export const CreateStory = () => {
 					}),
 				]}
 				onUpdate={(editor) => setBody(editor.getHTML())}
+				theme={currentTheme === 'light' ? defaultTheme : darkTheme}
 			/>
 
 			<ImageUploader

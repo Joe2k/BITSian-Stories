@@ -16,6 +16,9 @@ import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import { WithContext as ReactTags } from 'react-tag-input';
+import defaultTheme from '../themes/default';
+import darkTheme from '../themes/dark';
+import { CustomThemeContext } from '../context/CustomThemeProvider';
 
 const KeyCodes = {
 	comma: 188,
@@ -33,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const UpdatePage = () => {
-	const classes = useStyles();
+    const classes = useStyles();
+    const { currentTheme } = React.useContext(CustomThemeContext);
 	let history = useHistory();
 	const [body, setBody] = useState('');
 	const [title, setTitle] = useState('');
@@ -119,6 +123,7 @@ export const UpdatePage = () => {
 					onUpdate={(editor) => {
 						setTitle(editor.getHTML());
 					}}
+					theme={currentTheme === 'light' ? defaultTheme : darkTheme}
 				/>
 			)}
 
@@ -141,6 +146,7 @@ export const UpdatePage = () => {
 						}),
 					]}
 					onUpdate={(editor) => setBody(editor.getHTML())}
+					theme={currentTheme === 'light' ? defaultTheme : darkTheme}
 				/>
 			)}
 

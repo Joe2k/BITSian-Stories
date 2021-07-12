@@ -7,10 +7,18 @@
 	font-size: 1.1rem !important;
 	line-height: 1.5 !important;
 }
+.css-1rrft7a {
+	font-size: 1.1rem !important;
+	line-height: 1.5 !important;
+}
 
 .graf--p {
 	margin-bottom: 20px !important;
 	text-align: justify !important;
+}
+
+.graf span {
+	color: revert !important;
 }
 /* Styles for the input */
 .ReactTags__tagInput {
@@ -76,4 +84,17 @@
 	cursor: pointer;
 	background: none;
 	color: white;
+}
+/* .ProseMirror ul {
+	padding: 0;
+} */
+
+@media only screen and (max-width: 800px) {
+	.ProseMirror ul {
+		padding: 0;
+	}
+
+	.ProseMirror ol {
+		padding: 0;
+	}
 }

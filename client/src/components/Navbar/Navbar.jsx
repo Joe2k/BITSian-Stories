@@ -9,7 +9,9 @@ import Menu from '@material-ui/core/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '@material-ui/core/Link';
 import { Button, Icon } from '@material-ui/core';
-import LogOut from '@material-ui/icons/ExitToApp';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import { CustomThemeContext } from '../../context/CustomThemeProvider';
 
 const useStyles = makeStyles((theme) => ({
 	grow: {
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
 	const classes = useStyles();
+	const { currentTheme, setTheme } = React.useContext(CustomThemeContext);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -168,6 +171,20 @@ function Navbar() {
 							>
 								<Button color="secondary">New</Button>
 							</Link>
+							<IconButton
+								color="secondary"
+								onClick={() => {
+									if (currentTheme === 'light')
+										setTheme('dark');
+									else setTheme('light');
+								}}
+							>
+								{currentTheme === 'dark' ? (
+									<Brightness7Icon />
+								) : (
+									<Brightness3Icon />
+								)}
+							</IconButton>
 							<Link
 								href="https://github.com/Joe2k/BITSian-Stories"
 								target="_blank"
@@ -184,11 +201,24 @@ function Navbar() {
 					</div>
 					<div className={classes.sectionMobile}>
 						<IconButton
+							color="secondary"
+							onClick={() => {
+								if (currentTheme === 'light') setTheme('dark');
+								else setTheme('light');
+							}}
+						>
+							{currentTheme === 'dark' ? (
+								<Brightness7Icon />
+							) : (
+								<Brightness3Icon />
+							)}
+						</IconButton>
+						<IconButton
 							aria-label="show more"
 							aria-controls={mobileMenuId}
 							aria-haspopup="true"
 							onClick={handleMobileMenuOpen}
-							color="inherit"
+							color="secondary"
 						>
 							<MoreIcon />
 						</IconButton>

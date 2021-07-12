@@ -37,7 +37,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						<Icon
 							className="fab fa-linkedin"
 							color="primary"
-							fontSize="large"
+							fontSize="medium"
 						></Icon>
 					</IconButton>
 				</Link>
@@ -48,7 +48,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						<Icon
 							className="fab fa-github"
 							color="primary"
-							fontSize="large"
+							fontSize="medium"
 						></Icon>
 					</IconButton>
 				</Link>
@@ -63,7 +63,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						<Icon
 							className="fas fa-envelope"
 							color="primary"
-							fontSize="large"
+							fontSize="medium"
 						></Icon>
 					</IconButton>
 				</Link>
@@ -74,7 +74,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						<Icon
 							className="fab fa-facebook"
 							color="primary"
-							fontSize="large"
+							fontSize="medium"
 						></Icon>
 					</IconButton>
 				</Link>
@@ -85,7 +85,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						<Icon
 							className="fab fa-instagram"
 							color="primary"
-							fontSize="large"
+							fontSize="medium"
 						></Icon>
 					</IconButton>
 				</Link>
@@ -109,7 +109,7 @@ const ConnectionButtons = ({ urls, id }) => {
 					<Icon
 						className="fas fa-share-alt"
 						color="primary"
-						fontSize="large"
+						fontSize="medium"
 					></Icon>
 				</IconButton>
 			</Tooltip>
@@ -119,7 +119,7 @@ const ConnectionButtons = ({ urls, id }) => {
 					<Icon
 						className="fas fa-pen"
 						color="primary"
-						fontSize="large"
+						fontSize="medium"
 					></Icon>
 				</IconButton>
 			</Link>

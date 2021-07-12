@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Dante, { darkTheme } from 'dante3';
+import Dante from 'dante3';
 import {
 	makeStyles,
 	Button,
@@ -25,6 +25,9 @@ import { useParams } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import ConnectionButtons from '../components/ConnectionButtons/ConnectionButtons';
 import ReadStoryBreadcrumbs from '../components/Breadcrumbs/ReadStoryBreadcrumbs';
+import defaultTheme from '../themes/default';
+import darkTheme from '../themes/dark';
+import { CustomThemeContext } from '../context/CustomThemeProvider';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -71,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ReadStory = () => {
 	const classes = useStyles();
+	const { currentTheme } = React.useContext(CustomThemeContext);
 	const [body, setBody] = useState('');
 	const [title, setTitle] = useState('');
 	const [picture, setPicture] = useState();
@@ -119,14 +123,24 @@ export const ReadStory = () => {
 									widgets={[]}
 									readOnly={true}
 									style={{ flexGrow: 1 }}
+									theme={
+										currentTheme === 'light'
+											? defaultTheme
+											: darkTheme
+									}
 								/>
 								<Link
 									underline="none"
 									href={'/category/' + category}
 								>
 									<div>
-										{category && (
+										{category &&
+										currentTheme === 'light' ? (
 											<h2 className="css-1p0umon graf graf--h">
+												{category}
+											</h2>
+										) : (
+											<h2 className="css-1rrft7a graf graf--h">
 												{category}
 											</h2>
 										)}
@@ -168,6 +182,7 @@ export const ReadStory = () => {
 					content={body}
 					widgets={[]}
 					readOnly={true}
+					theme={currentTheme === 'light' ? defaultTheme : darkTheme}
 				/>
 			)}
 			<Divider

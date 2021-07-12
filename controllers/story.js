@@ -55,7 +55,7 @@ exports.updateStory = async (req, res, next) => {
 			if (err) {
 				return next(err);
 			}
-			console.log(doc);
+			// console.log(doc);
 			return res.json(doc.uniqueName);
 		}
 	);
@@ -102,7 +102,7 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 			});
 		});
 
-		recommendations = getRandom(newStories, 3);
+		recommendations = getRandom(newStories, Math.min(3, newStories.length));
 		//console.log({ ...story, recommendations });
 
 		return res.json({ ...story._doc, recommendations });

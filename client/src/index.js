@@ -5,17 +5,18 @@ import App from './App';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import CustomThemeProvider from './context/CustomThemeProvider';
 
-const theme = createMuiTheme({
-	palette: {
-		type: 'light',
-	},
-});
+// const theme = createMuiTheme({
+// 	palette: {
+// 		type: 'light',
+// 	},
+// });
 
 ReactDOM.render(
-	<ThemeProvider theme={theme}>
+	<CustomThemeProvider>
 		<CssBaseline />
 		<App />
-	</ThemeProvider>,
+	</CustomThemeProvider>,
 	document.getElementById('root')
 );
