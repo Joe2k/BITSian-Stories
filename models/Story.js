@@ -42,6 +42,9 @@ var StorySchema = new Schema({
 		type: String,
 		unique: true,
 	},
+	cgpa: {
+		type: Number,
+	},
 });
 
 module.exports = Story = mongoose.model('stories', StorySchema);

@@ -16,7 +16,7 @@ exports.createStory = async (req, res, next) => {
 				return next(error);
 			}
 			try {
-				const story = await Story.create({
+				let body = {
 					title: req.body.title,
 					body: req.body.body,
 					profilePic: result.url,
@@ -24,7 +24,11 @@ exports.createStory = async (req, res, next) => {
 					tags: JSON.parse(req.body.tags),
 					urls: JSON.parse(req.body.urls),
 					uniqueName: req.body.uniqueName,
-				});
+				};
+				if (req.body.cgpa) {
+					body = { ...body, cgpa: req.body.cgpa };
+				}
+				const story = await Story.create(body);
 
 				fs.unlinkSync(req.file.path);
 
@@ -42,15 +46,20 @@ exports.createStory = async (req, res, next) => {
 };
 
 exports.updateStory = async (req, res, next) => {
+	let body = {
+		title: req.body.title,
+		body: req.body.body,
+		category: req.body.category,
+		tags: req.body.tags,
+		urls: req.body.urls,
+	};
+	if (req.body.cgpa) {
+		body = { ...body, cgpa: req.body.cgpa };
+	}
+
 	Story.findOneAndUpdate(
 		{ uniqueName: req.params.uniqueName },
-		{
-			title: req.body.title,
-			body: req.body.body,
-			category: req.body.category,
-			tags: req.body.tags,
-			urls: req.body.urls,
-		},
+		body,
 		(err, doc) => {
 			if (err) {
 				return next(err);

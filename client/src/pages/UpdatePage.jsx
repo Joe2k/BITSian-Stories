@@ -51,6 +51,7 @@ export const UpdatePage = () => {
 		email: '',
 	});
 	const [category, setCategory] = useState();
+	const [cgpa, setCgpa] = useState();
 	let { uniqueName } = useParams();
 
 	useEffect(() => {
@@ -60,6 +61,9 @@ export const UpdatePage = () => {
 			setTitle(res.data.title);
 			setCategory(res.data.category);
 			setUrls(res.data.urls);
+			if (res.data.cgpa) {
+				setCgpa(res.data.cgpa);
+			}
 
 			res.data.tags.forEach((tag, i, arr) => {
 				arr[i].id = tag.text;
@@ -73,14 +77,13 @@ export const UpdatePage = () => {
 
 	const handleSubmit = () => {
 		if (title !== '' && body !== '' && category && uniqueName !== '') {
+			let data = { body, title, category, urls, tags };
+			if (cgpa) {
+				data = { ...data, cgpa };
+			}
+
 			axios
-				.put('/api/story/' + uniqueName, {
-					body,
-					title,
-					category,
-					urls,
-					tags,
-				})
+				.put('/api/story/' + uniqueName, data)
 				.then((res) => {
 					if (res.status === 200) {
 						history.push(`/story/${res.data}`);
@@ -170,6 +173,14 @@ export const UpdatePage = () => {
 			)}
 
 			<FormHelperText>Required</FormHelperText>
+			<TextField
+				id="cgpa"
+				label="CGPA"
+				fullWidth
+				type="number"
+				value={cgpa}
+				onChange={(e) => setCgpa(e.target.value)}
+			/>
 			<TextField
 				id="linkedin"
 				label="Linkedin URL (Optional)"

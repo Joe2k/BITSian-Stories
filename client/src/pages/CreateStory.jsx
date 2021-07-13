@@ -55,6 +55,7 @@ export const CreateStory = () => {
 	});
 	const [category, setCategory] = useState();
 	const [uniqueName, setUniqueName] = useState();
+	const [cgpa, setCgpa] = useState();
 
 	const handleSubmit = () => {
 		if (
@@ -73,6 +74,9 @@ export const CreateStory = () => {
 			formData.append('tags', JSON.stringify(tags));
 			formData.append('urls', JSON.stringify(urls));
 			formData.append('uniqueName', uniqueName);
+			if (cgpa) {
+				formData.append('cgpa', cgpa);
+			}
 
 			axios
 				.post('/api/story', formData)
@@ -168,9 +172,16 @@ export const CreateStory = () => {
 				<MenuItem value={'Product'}>Product</MenuItem>
 				<MenuItem value={'Business'}>Business</MenuItem>
 				<MenuItem value={'Finance'}>Finance</MenuItem>
-				<MenuItem value={'Finance'}>Research</MenuItem>
+				<MenuItem value={'Research'}>Research</MenuItem>
 			</Select>
 			<FormHelperText>Required</FormHelperText>
+			<TextField
+				id="cgpa"
+				label="CGPA"
+				fullWidth
+				type="number"
+				onChange={(e) => setCgpa(e.target.value)}
+			/>
 			<TextField
 				id="unique_name"
 				label="Unique Name - Enter a unique name with no spaces which wil be used in the URL of the story"

@@ -81,6 +81,7 @@ export const ReadStory = () => {
 	const [category, setCategory] = useState('');
 	const [urls, setUrls] = useState({});
 	const [tags, setTags] = useState([]);
+	const [cgpa, setCgpa] = useState();
 	let { id } = useParams();
 	const [recommendations, setRecommendations] = useState([]);
 
@@ -93,6 +94,10 @@ export const ReadStory = () => {
 			setCategory(res.data.category);
 			setUrls(res.data.urls);
 			setTags(res.data.tags);
+			if (res.data.cgpa) {
+				setCgpa(res.data.cgpa);
+			}
+			console.log(cgpa);
 
 			setRecommendations(res.data.recommendations);
 			// document.title = res.data.title.replace(/<[^>]+>/g, '');
@@ -146,6 +151,24 @@ export const ReadStory = () => {
 										)}
 									</div>
 								</Link>
+								<div>
+									{cgpa && currentTheme === 'light' && (
+										<h1
+											style={{ fontWeight: 'bold' }}
+											className="css-1p0umon graf graf--h"
+										>
+											CGPA : {cgpa}
+										</h1>
+									)}
+									{cgpa && currentTheme === 'dark' && (
+										<h1
+											style={{ fontWeight: 'bold' }}
+											className="css-1rrft7a graf graf--h"
+										>
+											CGPA : {cgpa}
+										</h1>
+									)}
+								</div>
 
 								<div className={classes.tags}>
 									{tags.map((tag) => (
