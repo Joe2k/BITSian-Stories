@@ -157,6 +157,20 @@ function Navbar() {
 								<Button color="secondary">Finance</Button>
 							</Link>
 							<Link
+								href="/category/business"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Business</Button>
+							</Link>
+							<Link
+								href="/category/product"
+								underline="none"
+								color="secondary"
+							>
+								<Button color="secondary">Product</Button>
+							</Link>
+							<Link
 								href="/category/research"
 								underline="none"
 								color="secondary"

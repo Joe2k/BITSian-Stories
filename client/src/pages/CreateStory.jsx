@@ -148,7 +148,7 @@ export const CreateStory = () => {
 				withIcon={true}
 				buttonText="Choose your profile picture"
 				onChange={onDrop}
-				imgExtension={['.jpg', '.png']}
+				imgExtension={['.jpg', '.png', '.jpeg']}
 				maxFileSize={5242880}
 				singleImage={true}
 				withPreview={true}
@@ -168,6 +168,7 @@ export const CreateStory = () => {
 				<MenuItem value={'Product'}>Product</MenuItem>
 				<MenuItem value={'Business'}>Business</MenuItem>
 				<MenuItem value={'Finance'}>Finance</MenuItem>
+				<MenuItem value={'Finance'}>Research</MenuItem>
 			</Select>
 			<FormHelperText>Required</FormHelperText>
 			<TextField

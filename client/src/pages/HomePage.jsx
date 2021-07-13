@@ -34,11 +34,22 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		marginBottom: '10px',
 	},
+	tags2: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		'& > *': {
+			margin: theme.spacing(0.5),
+		},
+		justifyContent: 'center',
+		textAlign: 'center',
+		marginBottom: '10px',
+	},
 }));
 
 export const HomePage = () => {
 	const classes = useStyles();
 	const [stories, setStories] = useState([]);
+	const techTags = ['Adobe', 'Amazon', 'Apple', 'Google', 'GSoC', 'Nutanix'];
 
 	useEffect(() => {
 		axios.get('/api/story').then((res) => {
@@ -110,14 +121,28 @@ export const HomePage = () => {
 										></Icon>
 										Tech
 									</Typography>
-									<Typography
-										variant="body2"
-										color="textSecondary"
-										component="p"
-									>
-										Get to know more about IT companies and
-										their work culture!
-									</Typography>
+									<div className={classes.tags2}>
+										{techTags.map((tag) => (
+											<Link
+												underline="none"
+												href={
+													'/category/tech/' +
+													'?search=' +
+													tag
+												}
+											>
+												<Chip
+													label={tag}
+													color="secondary"
+													variant="outlined"
+													clickable
+													style={{
+														fontSize: '12px',
+													}}
+												/>
+											</Link>
+										))}
+									</div>
 								</CardContent>
 							</CardActionArea>
 						</Card>
@@ -155,8 +180,7 @@ export const HomePage = () => {
 										color="textSecondary"
 										component="p"
 									>
-										Get to know more about Core companies
-										and their work culture!
+										Google | Apple | GSoC | CodeNation
 									</Typography>
 								</CardContent>
 							</CardActionArea>
