@@ -109,6 +109,146 @@ function Navbar() {
 		>
 			<>
 				<MenuItem>
+					<Link
+						href="/category/tech"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-laptop-code"
+							color="secondary"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Tech</Button>
+					</Link>
+				</MenuItem>
+				<MenuItem>
+					<Link
+						href="/category/core"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-cogs"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Core</Button>
+					</Link>
+				</MenuItem>
+				<MenuItem>
+					<Link
+						href="/category/finance"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-percentage"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Finance</Button>
+					</Link>
+				</MenuItem>
+				<MenuItem>
+					<Link
+						href="/category/business"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-chart-line"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Business</Button>
+					</Link>
+				</MenuItem>
+				<MenuItem>
+					<Link
+						href="/category/product"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-tasks"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Product</Button>
+					</Link>
+				</MenuItem>
+				<MenuItem>
+					<Link
+						href="/category/research"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-flask"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button color="secondary">Research</Button>
+					</Link>
+				</MenuItem>
+
+				<MenuItem>
 					<Link href="/story/new" underline="none">
 						<Button color="secondary">New</Button>
 					</Link>

@@ -49,7 +49,24 @@ const useStyles = makeStyles((theme) => ({
 export const HomePage = () => {
 	const classes = useStyles();
 	const [stories, setStories] = useState([]);
-	const techTags = ['Adobe', 'Amazon', 'Apple', 'Google', 'GSoC', 'Nutanix'];
+	const techTags = [
+		'Adobe',
+		'Atlassian',
+		'Apple',
+		'Google',
+		'GSoC',
+		'Walmart Labs',
+	];
+
+	const coreTags = [
+		'ExxonMobil',
+		'Silicon Labs',
+		'Micron',
+		'NVIDIA',
+		'Analog Devices',
+	];
+	const businessTags = ['Bain & Company'];
+	const productTags = ['CRED', 'Trell', 'FamPay', 'Groww'];
 
 	useEffect(() => {
 		axios.get('/api/story').then((res) => {
@@ -175,13 +192,136 @@ export const HomePage = () => {
 										></Icon>
 										Core
 									</Typography>
+									<div className={classes.tags2}>
+										{coreTags.map((tag) => (
+											<Link
+												underline="none"
+												href={
+													'/category/core/' +
+													'?search=' +
+													tag
+												}
+											>
+												<Chip
+													label={tag}
+													color="secondary"
+													variant="outlined"
+													clickable
+													style={{
+														fontSize: '12px',
+													}}
+												/>
+											</Link>
+										))}
+									</div>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
 									<Typography
-										variant="body2"
-										color="textSecondary"
-										component="p"
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
 									>
-										Google | Apple | GSoC | CodeNation
+										<Icon
+											className="fas fa-tasks"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Product
 									</Typography>
+									<div className={classes.tags2}>
+										{productTags.map((tag) => (
+											<Link
+												underline="none"
+												href={
+													'/category/product/' +
+													'?search=' +
+													tag
+												}
+											>
+												<Chip
+													label={tag}
+													color="secondary"
+													variant="outlined"
+													clickable
+													style={{
+														fontSize: '12px',
+													}}
+												/>
+											</Link>
+										))}
+									</div>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card>
+							<CardActionArea>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h6"
+										component="h2"
+										align="center"
+										color="primary"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											flexWrap: 'wrap',
+											justifyContent: 'center',
+										}}
+									>
+										<Icon
+											className="fas fa-chart-line"
+											color="primary"
+											style={{
+												marginRight: '10px',
+												width: '30px',
+											}}
+											fontSize="default"
+										></Icon>
+										Business
+									</Typography>
+									<div className={classes.tags2}>
+										{businessTags.map((tag) => (
+											<Link
+												underline="none"
+												href={
+													'/category/business/' +
+													'?search=' +
+													tag
+												}
+											>
+												<Chip
+													label={tag}
+													color="secondary"
+													variant="outlined"
+													clickable
+													style={{
+														fontSize: '12px',
+													}}
+												/>
+											</Link>
+										))}
+									</div>
 								</CardContent>
 							</CardActionArea>
 						</Card>
@@ -226,6 +366,7 @@ export const HomePage = () => {
 							</CardActionArea>
 						</Card>
 					</Grid>
+
 					<Grid item xs={12} sm={6} md={4}>
 						<Card>
 							<CardActionArea>
