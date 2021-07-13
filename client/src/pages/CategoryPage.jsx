@@ -104,7 +104,7 @@ export const CategoryPage = () => {
 	}, [localSearch]);
 
 	return (
-		<Grid container className={classes.root} spacing={2}>
+		<Grid container className={classes.root}>
 			<Grid item xs={12}>
 				<CategoryPageBreadcrumbs category={category} />
 			</Grid>

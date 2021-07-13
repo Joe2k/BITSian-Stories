@@ -48,7 +48,7 @@ export const HomePage = () => {
 	}, []);
 
 	return (
-		<Grid container className={classes.root} spacing={2}>
+		<Grid container className={classes.root}>
 			<Grid item xs={12}>
 				<Typography
 					variant="h2"

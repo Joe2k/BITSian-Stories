@@ -12,14 +12,13 @@ import { ReadStory } from './pages/ReadStory';
 import './App.css';
 import { CategoryPage } from './pages/CategoryPage';
 import { UpdatePage } from './pages/UpdatePage';
-import { Scrollbars } from 'react-custom-scrollbars-2';
+import { Scrollbars } from 'react-custom-scrollbars';
 import {
 	Backdrop,
 	CircularProgress,
 	Fade,
 	makeStyles,
 } from '@material-ui/core';
-
 const useStyles = makeStyles((theme) => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -37,22 +36,7 @@ function App() {
 		});
 	}, []);
 	return (
-		<Scrollbars
-			style={{
-				height: '100vh',
-			}}
-			renderThumbVertical={({ style, ...props }) => (
-				<div
-					{...props}
-					style={{
-						...style,
-						backgroundColor: '#ff6363',
-						width: '4px',
-						opacity: '0.7',
-					}}
-				/>
-			)}
-		>
+		<>
 			<Fade in={loading}>
 				<Backdrop className={classes.backdrop} open={loading}>
 					<CircularProgress color="primary" />
@@ -78,7 +62,7 @@ function App() {
 					</Route>
 				</Switch>
 			</Router>
-		</Scrollbars>
+		</>
 	);
 }
 

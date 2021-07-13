@@ -10,6 +10,19 @@ export const CustomThemeContext = React.createContext({
 });
 
 export const light = {
+	overrides: {
+		MuiCssBaseline: {
+			'@global': {
+				'*::-webkit-scrollbar': {
+					width: '6px',
+					height: '4px',
+				},
+				'*::-webkit-scrollbar-thumb': {
+					backgroundColor: 'rgba(245, 0, 87, 0.7)',
+				},
+			},
+		},
+	},
 	palette: {
 		type: 'light',
 		background: {
@@ -19,6 +32,19 @@ export const light = {
 };
 
 export const dark = {
+	overrides: {
+		MuiCssBaseline: {
+			'@global': {
+				'*::-webkit-scrollbar': {
+					width: '6px',
+					height: '4px',
+				},
+				'*::-webkit-scrollbar-thumb': {
+					backgroundColor: '#ff6363',
+				},
+			},
+		},
+	},
 	palette: {
 		type: 'dark',
 		primary: {
