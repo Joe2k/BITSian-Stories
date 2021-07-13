@@ -18,6 +18,7 @@ import {
 	CardContent,
 	Card,
 	Divider,
+	Paper,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
@@ -104,203 +105,225 @@ export const ReadStory = () => {
 		});
 	}, []);
 	return (
-		<div className={classes.root}>
-			<ReadStoryBreadcrumbs title={title} category={category} />
-			<Grid container spacing={3} style={{ marginBottom: '30px' }}>
-				<Grid item sm={4} xs={12}>
-					{picture && (
-						<Box alignItems="center" className={classes.imgBox}>
-							<img
-								className={classes.img}
-								src={picture}
-								alt={title.replace(/<[^>]+>/g, '')}
-							/>
-						</Box>
-					)}
-				</Grid>
-				<Grid item sm={8} xs={12}>
-					{title && (
-						<Box alignItems="center" className={classes.imgBox}>
-							<div>
-								<Dante
-									bodyPlaceholder={'A Catchy Title...'}
-									content={title}
-									widgets={[]}
-									readOnly={true}
-									style={{ flexGrow: 1 }}
-									theme={
-										currentTheme === 'light'
-											? defaultTheme
-											: darkTheme
-									}
+		<>
+			<div className={classes.root}>
+				<ReadStoryBreadcrumbs title={title} category={category} />
+				<Grid container spacing={3} style={{ marginBottom: '30px' }}>
+					<Grid item sm={4} xs={12}>
+						{picture && (
+							<Box alignItems="center" className={classes.imgBox}>
+								<img
+									className={classes.img}
+									src={picture}
+									alt={title.replace(/<[^>]+>/g, '')}
 								/>
-								<Link
-									underline="none"
-									href={'/category/' + category}
-								>
+							</Box>
+						)}
+					</Grid>
+					<Grid item sm={8} xs={12}>
+						{title && (
+							<Box alignItems="center" className={classes.imgBox}>
+								<div>
+									<Dante
+										bodyPlaceholder={'A Catchy Title...'}
+										content={title}
+										widgets={[]}
+										readOnly={true}
+										style={{ flexGrow: 1 }}
+										theme={
+											currentTheme === 'light'
+												? defaultTheme
+												: darkTheme
+										}
+									/>
+									<Link
+										underline="none"
+										href={'/category/' + category}
+									>
+										<div>
+											{category &&
+											currentTheme === 'light' ? (
+												<h2 className="css-1p0umon graf graf--h">
+													{category}
+												</h2>
+											) : (
+												<h2 className="css-1rrft7a graf graf--h">
+													{category}
+												</h2>
+											)}
+										</div>
+									</Link>
 									<div>
-										{category &&
-										currentTheme === 'light' ? (
-											<h2 className="css-1p0umon graf graf--h">
-												{category}
-											</h2>
-										) : (
-											<h2 className="css-1rrft7a graf graf--h">
-												{category}
-											</h2>
+										{cgpa && currentTheme === 'light' && (
+											<h1
+												style={{ fontWeight: 'bold' }}
+												className="css-1p0umon graf graf--h"
+											>
+												CGPA : {cgpa}
+											</h1>
+										)}
+										{cgpa && currentTheme === 'dark' && (
+											<h1
+												style={{ fontWeight: 'bold' }}
+												className="css-1rrft7a graf graf--h"
+											>
+												CGPA : {cgpa}
+											</h1>
 										)}
 									</div>
-								</Link>
-								<div>
-									{cgpa && currentTheme === 'light' && (
-										<h1
-											style={{ fontWeight: 'bold' }}
-											className="css-1p0umon graf graf--h"
-										>
-											CGPA : {cgpa}
-										</h1>
-									)}
-									{cgpa && currentTheme === 'dark' && (
-										<h1
-											style={{ fontWeight: 'bold' }}
-											className="css-1rrft7a graf graf--h"
-										>
-											CGPA : {cgpa}
-										</h1>
-									)}
-								</div>
 
-								<div className={classes.tags}>
-									{tags.map((tag) => (
-										<Link
-											underline="none"
-											href={
-												'/category/' +
-												category +
-												'?search=' +
-												tag.text
-											}
-										>
-											<Chip
-												label={tag.text}
-												color="secondary"
-												variant="outlined"
-												clickable
-												style={{ fontSize: '16px' }}
-											/>
-										</Link>
-									))}
-								</div>
-
-								<ConnectionButtons id={id} urls={urls} />
-							</div>
-						</Box>
-					)}
-				</Grid>
-			</Grid>
-
-			{body && (
-				<Dante
-					bodyPlaceholder={'Story goes here...'}
-					content={body}
-					widgets={[]}
-					readOnly={true}
-					theme={currentTheme === 'light' ? defaultTheme : darkTheme}
-				/>
-			)}
-			<Divider
-				variant="middle"
-				style={{
-					marginTop: '40px',
-					marginBottom: '20px',
-				}}
-			/>
-
-			<Grid container direction="row" justify="center" spacing={4}>
-				{recommendations.length > 0 && (
-					<Grid item xs={12}>
-						<Typography variant="h4">
-							{'More on ' + category}
-						</Typography>
-					</Grid>
-				)}
-
-				{recommendations.length > 0 &&
-					recommendations.map((story) => (
-						<Grid item xs={12} sm={6} md={4}>
-							<Link
-								underline="none"
-								href={'/story/' + story.uniqueName}
-							>
-								<Card style={{ maxWidth: '300' }}>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt={story.title}
-											height="250"
-											image={story.profilePic}
-											title={story.title}
-										/>
-										<CardContent>
-											<Typography
-												gutterBottom
-												variant="h6"
-												component="h2"
-												align="center"
-												style={{ marginBottom: 0 }}
+									<div className={classes.tags}>
+										{tags.map((tag) => (
+											<Link
+												underline="none"
+												href={
+													'/category/' +
+													category +
+													'?search=' +
+													tag.text
+												}
 											>
-												{story.title}
-											</Typography>
-											<div className={classes.tags2}>
-												{story.tags &&
-													story.tags
-														.slice(
-															0,
-															Math.min(
-																3,
-																story.tags
-																	.length
+												<Chip
+													label={tag.text}
+													color="secondary"
+													variant="outlined"
+													clickable
+													style={{ fontSize: '16px' }}
+												/>
+											</Link>
+										))}
+									</div>
+
+									<ConnectionButtons id={id} urls={urls} />
+								</div>
+							</Box>
+						)}
+					</Grid>
+				</Grid>
+
+				{body && (
+					<Dante
+						bodyPlaceholder={'Story goes here...'}
+						content={body}
+						widgets={[]}
+						readOnly={true}
+						theme={
+							currentTheme === 'light' ? defaultTheme : darkTheme
+						}
+					/>
+				)}
+				<Divider
+					variant="middle"
+					style={{
+						marginTop: '40px',
+						marginBottom: '20px',
+					}}
+				/>
+
+				<Grid container direction="row" justify="center" spacing={4}>
+					{recommendations.length > 0 && (
+						<Grid item xs={12}>
+							<Typography variant="h4">
+								{'More on ' + category}
+							</Typography>
+						</Grid>
+					)}
+
+					{recommendations.length > 0 &&
+						recommendations.map((story) => (
+							<Grid item xs={12} sm={6} md={4}>
+								<Link
+									underline="none"
+									href={'/story/' + story.uniqueName}
+								>
+									<Card style={{ maxWidth: '300' }}>
+										<CardActionArea>
+											<CardMedia
+												component="img"
+												alt={story.title}
+												height="250"
+												image={story.profilePic}
+												title={story.title}
+											/>
+											<CardContent>
+												<Typography
+													gutterBottom
+													variant="h6"
+													component="h2"
+													align="center"
+													style={{ marginBottom: 0 }}
+												>
+													{story.title}
+												</Typography>
+												<div className={classes.tags2}>
+													{story.tags &&
+														story.tags
+															.slice(
+																0,
+																Math.min(
+																	3,
+																	story.tags
+																		.length
+																)
 															)
-														)
-														.map((tag) => (
-															<Link
-																underline="none"
-																href={
-																	'/category/' +
-																	story.category +
-																	'?search=' +
-																	tag.text
-																}
-															>
-																<Chip
-																	label={
+															.map((tag) => (
+																<Link
+																	underline="none"
+																	href={
+																		'/category/' +
+																		story.category +
+																		'?search=' +
 																		tag.text
 																	}
-																	color="secondary"
-																	variant="outlined"
-																	clickable
-																	style={{
-																		fontSize:
-																			'14px',
-																	}}
-																/>
-															</Link>
-														))}
-											</div>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												{story.body}
-											</Typography>
-										</CardContent>
-									</CardActionArea>
-								</Card>
-							</Link>
-						</Grid>
-					))}
-			</Grid>
-		</div>
+																>
+																	<Chip
+																		label={
+																			tag.text
+																		}
+																		color="secondary"
+																		variant="outlined"
+																		clickable
+																		style={{
+																			fontSize:
+																				'14px',
+																		}}
+																	/>
+																</Link>
+															))}
+												</div>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													{story.body}
+												</Typography>
+											</CardContent>
+										</CardActionArea>
+									</Card>
+								</Link>
+							</Grid>
+						))}
+				</Grid>
+			</div>
+			<Box
+				style={{
+					width: '100%',
+					backgroundColor:
+						currentTheme === 'light' ? '#FFDADA' : '#272727',
+					padding: '50px 12%',
+				}}
+			>
+				<Typography variant="h6">
+					<strong>DISCLAIMER</strong>
+				</Typography>
+				<Typography variant="body1" style={{ marginTop: '10px' }}>
+					The views, thoughts, and opinions expressed in the text
+					belong solely to the author and are not necessarily endorsed
+					by and do not reflect the official position of{' '}
+					<strong>BITSianStories</strong>.
+				</Typography>
+			</Box>
+		</>
 	);
 };

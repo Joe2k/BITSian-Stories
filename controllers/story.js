@@ -122,7 +122,7 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 
 exports.getAllStories = async (req, res, next) => {
 	try {
-		const stories = await Story.find({});
+		const stories = await Story.find({}).sort({ date: -1 }).exec();
 		let newStories = [];
 
 		stories.forEach((story) => {
@@ -141,7 +141,7 @@ exports.getAllStories = async (req, res, next) => {
 			});
 		});
 
-		return res.json(newStories);
+		return res.json(newStories.reverse());
 	} catch (e) {
 		return next(e);
 	}
