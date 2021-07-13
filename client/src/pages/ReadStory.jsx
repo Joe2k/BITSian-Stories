@@ -95,7 +95,7 @@ export const ReadStory = () => {
 			setTags(res.data.tags);
 
 			setRecommendations(res.data.recommendations);
-			document.title = res.data.title.replace(/<[^>]+>/g, '');
+			// document.title = res.data.title.replace(/<[^>]+>/g, '');
 		});
 	}, []);
 	return (

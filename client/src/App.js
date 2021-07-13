@@ -12,7 +12,6 @@ import { ReadStory } from './pages/ReadStory';
 import './App.css';
 import { CategoryPage } from './pages/CategoryPage';
 import { UpdatePage } from './pages/UpdatePage';
-import { Scrollbars } from 'react-custom-scrollbars';
 import {
 	Backdrop,
 	CircularProgress,

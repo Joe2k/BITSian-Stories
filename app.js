@@ -20,7 +20,19 @@ app.use('/api/upload', require('./routes/upload'));
 
 /* Frontend Routes */
 const path = require('path');
+const fs = require('fs');
+
+app.use('', require('./routes/frontend'));
+
+// app.get('/category/tech', (req, res) => {
+// 	const raw = fs.readFileSync(pathToIndex);
+// 	const pageTitle = 'Homepage - Welcome to my page';
+// 	const updated = raw.toString().replace(/\$OG_TITLE/g, `${pageTitle}`);
+// 	res.send(updated);
+// });
+
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+
 app.get('/*', function (req, res) {
 	res.sendFile(
 		path.join(__dirname, 'client', 'build', 'index.html'),

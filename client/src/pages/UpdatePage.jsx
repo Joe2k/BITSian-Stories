@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const UpdatePage = () => {
-    const classes = useStyles();
-    const { currentTheme } = React.useContext(CustomThemeContext);
+	const classes = useStyles();
+	const { currentTheme } = React.useContext(CustomThemeContext);
 	let history = useHistory();
 	const [body, setBody] = useState('');
 	const [title, setTitle] = useState('');
@@ -67,7 +67,7 @@ export const UpdatePage = () => {
 			});
 			setTags(res.data.tags);
 
-			document.title = res.data.title.replace(/<[^>]+>/g, '');
+			//document.title = res.data.title.replace(/<[^>]+>/g, '');
 		});
 	}, []);
 
