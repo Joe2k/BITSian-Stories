@@ -85,6 +85,7 @@ export const ReadStory = () => {
 	const [cgpa, setCgpa] = useState();
 	let { id } = useParams();
 	const [recommendations, setRecommendations] = useState([]);
+	const [branch, setBranch] = useState('');
 
 	useEffect(() => {
 		axios.get(`/api/story/${id}`).then((res) => {
@@ -97,6 +98,9 @@ export const ReadStory = () => {
 			setTags(res.data.tags);
 			if (res.data.cgpa) {
 				setCgpa(res.data.cgpa);
+			}
+			if (res.data.branch) {
+				setBranch(res.data.branch);
 			}
 			console.log(cgpa);
 
@@ -136,6 +140,50 @@ export const ReadStory = () => {
 												: darkTheme
 										}
 									/>
+									<div>
+										{branch && currentTheme === 'light' && (
+											<h1
+												style={{
+													margin: '5px 0px',
+												}}
+												className="css-1p0umon graf"
+											>
+												{branch}
+											</h1>
+										)}
+										{branch && currentTheme === 'dark' && (
+											<h1
+												style={{
+													margin: '5px 0px',
+												}}
+												className="css-1rrft7a graf"
+											>
+												{branch}
+											</h1>
+										)}
+									</div>
+									<div>
+										{cgpa && currentTheme === 'light' && (
+											<h1
+												style={{
+													margin: '5px 0px',
+												}}
+												className="css-1p0umon graf"
+											>
+												CGPA : {cgpa}
+											</h1>
+										)}
+										{cgpa && currentTheme === 'dark' && (
+											<h1
+												style={{
+													margin: '5px 0px',
+												}}
+												className="css-1rrft7a graf"
+											>
+												CGPA : {cgpa}
+											</h1>
+										)}
+									</div>
 									<Link
 										underline="none"
 										href={'/category/' + category}
@@ -143,34 +191,26 @@ export const ReadStory = () => {
 										<div>
 											{category &&
 											currentTheme === 'light' ? (
-												<h2 className="css-1p0umon graf graf--h">
+												<h2
+													style={{
+														margin: '5px 0px',
+													}}
+													className="css-1p0umon graf"
+												>
 													{category}
 												</h2>
 											) : (
-												<h2 className="css-1rrft7a graf graf--h">
+												<h2
+													style={{
+														margin: '5px 0px',
+													}}
+													className="css-1rrft7a graf"
+												>
 													{category}
 												</h2>
 											)}
 										</div>
 									</Link>
-									<div>
-										{cgpa && currentTheme === 'light' && (
-											<h1
-												style={{ fontWeight: 'bold' }}
-												className="css-1p0umon graf graf--h"
-											>
-												CGPA : {cgpa}
-											</h1>
-										)}
-										{cgpa && currentTheme === 'dark' && (
-											<h1
-												style={{ fontWeight: 'bold' }}
-												className="css-1rrft7a graf graf--h"
-											>
-												CGPA : {cgpa}
-											</h1>
-										)}
-									</div>
 
 									<div className={classes.tags}>
 										{tags.map((tag) => (
