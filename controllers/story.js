@@ -24,6 +24,7 @@ exports.createStory = async (req, res, next) => {
 					tags: JSON.parse(req.body.tags),
 					urls: JSON.parse(req.body.urls),
 					uniqueName: req.body.uniqueName,
+					branch: req.body.branch,
 				};
 				if (req.body.cgpa) {
 					body = { ...body, cgpa: req.body.cgpa };

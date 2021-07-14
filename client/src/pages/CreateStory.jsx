@@ -56,6 +56,7 @@ export const CreateStory = () => {
 	const [category, setCategory] = useState();
 	const [uniqueName, setUniqueName] = useState();
 	const [cgpa, setCgpa] = useState();
+	const [branch, setBranch] = useState('');
 
 	const handleSubmit = () => {
 		if (
@@ -63,7 +64,8 @@ export const CreateStory = () => {
 			body !== '' &&
 			picture &&
 			category &&
-			uniqueName !== ''
+			uniqueName !== '' &&
+			branch !== ''
 		) {
 			let formData = new FormData();
 
@@ -74,6 +76,7 @@ export const CreateStory = () => {
 			formData.append('tags', JSON.stringify(tags));
 			formData.append('urls', JSON.stringify(urls));
 			formData.append('uniqueName', uniqueName);
+			formData.append('branch', branch);
 			if (cgpa) {
 				formData.append('cgpa', cgpa);
 			}
@@ -188,6 +191,14 @@ export const CreateStory = () => {
 				fullWidth
 				placeholder="eg. jonathan-samuel"
 				onChange={(e) => setUniqueName(e.target.value)}
+				required
+			/>
+			<TextField
+				id="branch"
+				label="Branch"
+				fullWidth
+				placeholder="eg. Electronics and Communication"
+				onChange={(e) => setBranch(e.target.value)}
 				required
 			/>
 			<TextField
