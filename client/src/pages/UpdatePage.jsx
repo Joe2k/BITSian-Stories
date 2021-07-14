@@ -66,7 +66,7 @@ export const UpdatePage = () => {
 				setCgpa(res.data.cgpa);
 			}
 			if (res.data.branch) {
-				setCgpa(res.data.brach);
+				setBranch(res.data.branch);
 			}
 
 			res.data.tags.forEach((tag, i, arr) => {
