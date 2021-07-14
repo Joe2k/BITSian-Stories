@@ -59,6 +59,9 @@ function App() {
 					<Route exact path="/">
 						<HomePage />
 					</Route>
+					<Route path="*">
+						<Redirect to={{ pathname: '/' }} />
+					</Route>
 				</Switch>
 			</Router>
 		</>

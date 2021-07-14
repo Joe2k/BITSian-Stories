@@ -52,6 +52,7 @@ exports.updateStory = async (req, res, next) => {
 		category: req.body.category,
 		tags: req.body.tags,
 		urls: req.body.urls,
+		branch: req.body.branch,
 	};
 	if (req.body.cgpa) {
 		body = { ...body, cgpa: req.body.cgpa };

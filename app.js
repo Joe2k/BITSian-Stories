@@ -23,18 +23,18 @@ const path = require('path');
 const fs = require('fs');
 
 app.use('', require('./routes/frontend'));
-
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.get('/*', function (req, res) {
-	res.sendFile(
-		path.join(__dirname, 'client', 'build', 'index.html'),
-		function (err) {
-			if (err) {
-				res.status(500).send(err);
-			}
-		}
+	const pathToIndex = path.join(__dirname, 'client', 'build', 'index.html');
+	const raw = fs.readFileSync(pathToIndex);
+	let updated = raw.toString().replace(/\$OG_TITLE/g, 'BITSian Stories');
+	updated = updated.replace(
+		/\$OG_DESCRIPTION/g,
+		'Untold Stories of Students from BITS Pilani, Hyderabad Campus'
 	);
+	updated = updated.replace(/\$OG_IMAGE/g, '');
+	res.send(updated);
 });
 
 app.use(require('./controllers/error'));

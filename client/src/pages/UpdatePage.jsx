@@ -52,6 +52,7 @@ export const UpdatePage = () => {
 	});
 	const [category, setCategory] = useState();
 	const [cgpa, setCgpa] = useState();
+	const [branch, setBranch] = useState('');
 	let { uniqueName } = useParams();
 
 	useEffect(() => {
@@ -63,6 +64,9 @@ export const UpdatePage = () => {
 			setUrls(res.data.urls);
 			if (res.data.cgpa) {
 				setCgpa(res.data.cgpa);
+			}
+			if (res.data.branch) {
+				setCgpa(res.data.brach);
 			}
 
 			res.data.tags.forEach((tag, i, arr) => {
@@ -76,8 +80,14 @@ export const UpdatePage = () => {
 	}, []);
 
 	const handleSubmit = () => {
-		if (title !== '' && body !== '' && category && uniqueName !== '') {
-			let data = { body, title, category, urls, tags };
+		if (
+			title !== '' &&
+			body !== '' &&
+			category &&
+			uniqueName !== '' &&
+			branch !== ''
+		) {
+			let data = { body, title, category, urls, tags, branch };
 			if (cgpa) {
 				data = { ...data, cgpa };
 			}
@@ -180,6 +190,15 @@ export const UpdatePage = () => {
 				type="number"
 				value={cgpa}
 				onChange={(e) => setCgpa(e.target.value)}
+			/>
+			<TextField
+				id="branch"
+				label="Branch"
+				fullWidth
+				type="text"
+				required
+				value={branch}
+				onChange={(e) => setBranch(e.target.value)}
 			/>
 			<TextField
 				id="linkedin"

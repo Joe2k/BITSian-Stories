@@ -45,6 +45,9 @@ var StorySchema = new Schema({
 	cgpa: {
 		type: Number,
 	},
+	branch: {
+		type: String,
+	},
 });
 
 module.exports = Story = mongoose.model('stories', StorySchema);
