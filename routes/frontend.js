@@ -17,12 +17,10 @@ router.get('/story/:uniqueName', async (req, res) => {
 	);
 	const raw = fs.readFileSync(pathToIndex);
 	if (!story) {
-		let updated = raw
-			.toString()
-			.replace(/\$OG_TITLE/g, 'BITSian Stories - ' + req.params.category);
+		let updated = raw.toString().replace(/\$OG_TITLE/g, 'BITSian Stories');
 		updated = updated.replace(
 			/\$OG_DESCRIPTION/g,
-			'Get to know more about IT companies and their work culture!'
+			'Untold Stories of Students from BITS Pilani, Hyderabad Campus'
 		);
 		updated = updated.replace(/\$OG_IMAGE/g, '');
 		res.send(updated);
@@ -31,6 +29,10 @@ router.get('/story/:uniqueName', async (req, res) => {
 		bodyText = bodyText.split(' ');
 		bodyText = bodyText.slice(0, Math.min(20, bodyText.length));
 		bodyText = bodyText.join(' ');
+		bodyText = bodyText + '... \n';
+		story.tags.forEach((tag) => {
+			bodyText += tag.text + ' | ';
+		});
 
 		let name = convert(story.title);
 		name = name

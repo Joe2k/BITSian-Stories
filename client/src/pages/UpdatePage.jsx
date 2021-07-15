@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const UpdatePage = () => {
+export const UpdatePage = ({ setLoading }) => {
 	const classes = useStyles();
 	const { currentTheme } = React.useContext(CustomThemeContext);
 	let history = useHistory();
@@ -56,27 +56,34 @@ export const UpdatePage = () => {
 	let { uniqueName } = useParams();
 
 	useEffect(() => {
-		axios.get(`/api/story/${uniqueName}`).then((res) => {
-			console.log(res.data);
-			setBody(res.data.body);
-			setTitle(res.data.title);
-			setCategory(res.data.category);
-			setUrls(res.data.urls);
-			if (res.data.cgpa) {
-				setCgpa(res.data.cgpa);
-			}
-			if (res.data.branch) {
-				setBranch(res.data.branch);
-			}
+		axios
+			.get(`/api/story/${uniqueName}`)
+			.then((res) => {
+				console.log(res.data);
+				setBody(res.data.body);
+				setTitle(res.data.title);
+				setCategory(res.data.category);
+				setUrls(res.data.urls);
+				if (res.data.cgpa) {
+					setCgpa(res.data.cgpa);
+				}
+				if (res.data.branch) {
+					setBranch(res.data.branch);
+				}
 
-			res.data.tags.forEach((tag, i, arr) => {
-				arr[i].id = tag.text;
-				arr[i].key = tag.text;
+				res.data.tags.forEach((tag, i, arr) => {
+					arr[i].id = tag.text;
+					arr[i].key = tag.text;
+				});
+				setTags(res.data.tags);
+				setLoading(false);
+
+				//document.title = res.data.title.replace(/<[^>]+>/g, '');
+			})
+			.catch((e) => {
+				console.log(e);
+				setLoading(false);
 			});
-			setTags(res.data.tags);
-
-			//document.title = res.data.title.replace(/<[^>]+>/g, '');
-		});
 	}, []);
 
 	const handleSubmit = () => {

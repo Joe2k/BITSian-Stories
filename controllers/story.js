@@ -87,7 +87,7 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 			uniqueName: req.params.uniqueName,
 		});
 		if (!story) {
-			return next(e);
+			return next('Story Not Found');
 		}
 
 		let recommendations = await Story.find({

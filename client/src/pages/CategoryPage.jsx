@@ -49,7 +49,7 @@ function useQuery() {
 	return new URLSearchParams(useLocation().search);
 }
 
-export const CategoryPage = () => {
+export const CategoryPage = ({ setLoading }) => {
 	const classes = useStyles();
 	const query = useQuery();
 
@@ -85,6 +85,11 @@ export const CategoryPage = () => {
 					setLocalSearch(searchParam);
 					query.delete('search');
 				}
+				setLoading(false);
+			})
+			.catch((e) => {
+				console.log(e);
+				setLoading(false);
 			});
 	}, []);
 

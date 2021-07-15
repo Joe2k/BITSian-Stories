@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const HomePage = () => {
+export const HomePage = ({ setLoading }) => {
 	const classes = useStyles();
 	const [stories, setStories] = useState([]);
 	const techTags = [
@@ -72,6 +72,7 @@ export const HomePage = () => {
 		axios.get('/api/story').then((res) => {
 			console.log(res.data);
 			setStories(res.data);
+			setLoading(false);
 		});
 	}, []);
 

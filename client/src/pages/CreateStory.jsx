@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const CreateStory = () => {
+export const CreateStory = ({ setLoading }) => {
 	const classes = useStyles();
 	const { currentTheme } = React.useContext(CustomThemeContext);
 	let history = useHistory();
@@ -57,6 +57,12 @@ export const CreateStory = () => {
 	const [uniqueName, setUniqueName] = useState();
 	const [cgpa, setCgpa] = useState();
 	const [branch, setBranch] = useState('');
+
+	React.useEffect(() => {
+		window.addEventListener('load', () => {
+			setLoading(false);
+		});
+	}, []);
 
 	const handleSubmit = () => {
 		if (

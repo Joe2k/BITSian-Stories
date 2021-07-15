@@ -29,11 +29,11 @@ function App() {
 	const [loading, setLoading] = React.useState(true);
 	const classes = useStyles();
 
-	React.useEffect(() => {
-		window.addEventListener('load', () => {
-			setLoading(false);
-		});
-	}, []);
+	// React.useEffect(() => {
+	// 	window.addEventListener('load', () => {
+	// 		setLoading(false);
+	// 	});
+	// }, []);
 	return (
 		<>
 			<Fade in={loading}>
@@ -45,19 +45,19 @@ function App() {
 				<Navbar />
 				<Switch>
 					<Route exact path="/story/new">
-						<CreateStory />
+						<CreateStory setLoading={setLoading} />
 					</Route>
 					<Route path="/story/:uniqueName/edit">
-						<UpdatePage />
+						<UpdatePage setLoading={setLoading} />
 					</Route>
 					<Route path="/story/:id">
-						<ReadStory />
+						<ReadStory setLoading={setLoading} />
 					</Route>
 					<Route path="/category/:category">
-						<CategoryPage />
+						<CategoryPage setLoading={setLoading} />
 					</Route>
 					<Route exact path="/">
-						<HomePage />
+						<HomePage setLoading={setLoading} />
 					</Route>
 					<Route path="*">
 						<Redirect to={{ pathname: '/' }} />

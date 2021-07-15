@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ReadStory = () => {
+export const ReadStory = ({ setLoading }) => {
 	const classes = useStyles();
 	const { currentTheme } = React.useContext(CustomThemeContext);
 	const [body, setBody] = useState('');
@@ -86,32 +86,57 @@ export const ReadStory = () => {
 	let { id } = useParams();
 	const [recommendations, setRecommendations] = useState([]);
 	const [branch, setBranch] = useState('');
+	const [error, setError] = useState('');
 
 	useEffect(() => {
-		axios.get(`/api/story/${id}`).then((res) => {
-			console.log(res.data);
-			setBody(res.data.body);
-			setTitle(res.data.title);
-			setPicture(res.data.profilePic);
-			setCategory(res.data.category);
-			setUrls(res.data.urls);
-			setTags(res.data.tags);
-			if (res.data.cgpa) {
-				setCgpa(res.data.cgpa);
-			}
-			if (res.data.branch) {
-				setBranch(res.data.branch);
-			}
-			console.log(cgpa);
+		axios
+			.get(`/api/story/${id}`)
+			.then((res) => {
+				console.log(res.data);
+				setBody(res.data.body);
+				setTitle(res.data.title);
+				setPicture(res.data.profilePic);
+				setCategory(res.data.category);
+				setUrls(res.data.urls);
+				setTags(res.data.tags);
+				if (res.data.cgpa) {
+					setCgpa(res.data.cgpa);
+				}
+				if (res.data.branch) {
+					setBranch(res.data.branch);
+				}
+				console.log(cgpa);
 
-			setRecommendations(res.data.recommendations);
-			// document.title = res.data.title.replace(/<[^>]+>/g, '');
-		});
+				setRecommendations(res.data.recommendations);
+				setLoading(false);
+				// document.title = res.data.title.replace(/<[^>]+>/g, '');
+			})
+			.catch((err) => {
+				console.log(err);
+				setError('Invalid URL');
+				setLoading(false);
+			});
 	}, []);
 	return (
 		<>
 			<div className={classes.root}>
 				<ReadStoryBreadcrumbs title={title} category={category} />
+				{error && (
+					<Alert
+						variant="outlined"
+						severity="error"
+						action={
+							<Link color="inherit" underline="none" href="/">
+								<Button color="inherit" size="small">
+									Go Back To Home
+								</Button>
+							</Link>
+						}
+					>
+						{error}
+					</Alert>
+				)}
+
 				<Grid container spacing={3} style={{ marginBottom: '30px' }}>
 					<Grid item sm={4} xs={12}>
 						{picture && (
@@ -346,24 +371,26 @@ export const ReadStory = () => {
 						))}
 				</Grid>
 			</div>
-			<Box
-				style={{
-					width: '100%',
-					backgroundColor:
-						currentTheme === 'light' ? '#FFDADA' : '#272727',
-					padding: '50px 12%',
-				}}
-			>
-				<Typography variant="h6">
-					<strong>DISCLAIMER</strong>
-				</Typography>
-				<Typography variant="body1" style={{ marginTop: '10px' }}>
-					The views, thoughts, and opinions expressed in the text
-					belong solely to the author and are not necessarily endorsed
-					by and do not reflect the official position of{' '}
-					<strong>BITSianStories</strong>.
-				</Typography>
-			</Box>
+			{body && (
+				<Box
+					style={{
+						width: '100%',
+						backgroundColor:
+							currentTheme === 'light' ? '#FFDADA' : '#272727',
+						padding: '50px 12%',
+					}}
+				>
+					<Typography variant="h6">
+						<strong>DISCLAIMER</strong>
+					</Typography>
+					<Typography variant="body1" style={{ marginTop: '10px' }}>
+						The views, thoughts, and opinions expressed in the text
+						belong solely to the author and are not necessarily
+						endorsed by and do not reflect the official position of{' '}
+						<strong>BITSianStories</strong>.
+					</Typography>
+				</Box>
+			)}
 		</>
 	);
 };
