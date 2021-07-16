@@ -188,6 +188,7 @@ exports.updateSearchMetrics = async (req, res, next) => {
 
 exports.updateUserMetrics = async (req, res, next) => {
 	newrelic.incrementMetric('users');
+	newrelic.addCustomAttribute('newUser', 'yes');
 	return res.status(200);
 };
 
