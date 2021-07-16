@@ -18,6 +18,7 @@ import {
 	Fade,
 	makeStyles,
 } from '@material-ui/core';
+import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 	const [loading, setLoading] = React.useState(true);
 	const classes = useStyles();
+
+	if (!localStorage.getItem('user')) {
+		axios.post('/api/story/newUser');
+		localStorage.setItem('user', 'yes');
+	}
 
 	// React.useEffect(() => {
 	// 	window.addEventListener('load', () => {

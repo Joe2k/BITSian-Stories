@@ -8,6 +8,7 @@ const {
 	getStroiesByCategory,
 	updateStory,
 	updateSearchMetrics,
+	updateUserMetrics,
 } = require('../controllers/story');
 
 const multer = require('multer');
@@ -30,5 +31,6 @@ router.get('/category/:category', getStroiesByCategory);
 router.get('/:uniqueName', getStoryByUniqueName);
 router.put('/:uniqueName', updateStory);
 router.post('/search/:search', updateSearchMetrics);
+router.post('/newUser', updateUserMetrics);
 
 module.exports = router;

@@ -186,6 +186,11 @@ exports.updateSearchMetrics = async (req, res, next) => {
 	return res.status(200);
 };
 
+exports.updateUserMetrics = async (req, res, next) => {
+	newrelic.incrementMetric('users');
+	return res.status(200);
+};
+
 function getRandom(arr, n) {
 	var result = new Array(n),
 		len = arr.length,
