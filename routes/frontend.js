@@ -63,7 +63,7 @@ router.get('/category/:category', (req, res) => {
 		.replace(/\$OG_TITLE/g, 'BITSian Stories - ' + req.params.category);
 	updated = updated.replace(
 		/\$OG_DESCRIPTION/g,
-		'Get to know more about IT companies and their work culture!'
+		'Get to know more about companies and their work culture!'
 	);
 	updated = updated.replace(/\$OG_IMAGE/g, '');
 	res.send(updated);

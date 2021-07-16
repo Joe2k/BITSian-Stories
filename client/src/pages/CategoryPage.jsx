@@ -97,6 +97,7 @@ export const CategoryPage = ({ setLoading }) => {
 		setStories(
 			mainStories.filter((d) => d.search.includes(search.toLowerCase()))
 		);
+		axios.post('/api/story/search/' + search);
 	}, [search]);
 
 	React.useEffect(() => {

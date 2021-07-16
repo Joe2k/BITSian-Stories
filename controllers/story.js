@@ -2,6 +2,7 @@ const Story = require('../models/Story');
 const { convert } = require('html-to-text');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
+const newrelic = require('newrelic');
 
 exports.createStory = async (req, res, next) => {
 	try {
@@ -82,6 +83,8 @@ exports.getStoryById = async (req, res, next) => {
 };
 
 exports.getStoryByUniqueName = async (req, res, next) => {
+	newrelic.setTransactionName('/story/' + req.params.uniqueName);
+	newrelic.addCustomAttribute('uniqueName', req.params.uniqueName);
 	try {
 		const story = await Story.findOne({
 			uniqueName: req.params.uniqueName,
@@ -150,6 +153,8 @@ exports.getAllStories = async (req, res, next) => {
 };
 
 exports.getStroiesByCategory = async (req, res, next) => {
+	newrelic.setTransactionName('/category/' + req.params.category);
+	newrelic.addCustomAttribute('category', req.params.category);
 	try {
 		const stories = await Story.find({ category: req.params.category });
 		let newStories = [];
@@ -173,6 +178,12 @@ exports.getStroiesByCategory = async (req, res, next) => {
 	} catch (e) {
 		return next(e);
 	}
+};
+
+exports.updateSearchMetrics = async (req, res, next) => {
+	newrelic.setTransactionName('/search/' + req.params.search);
+	newrelic.addCustomAttribute('search', req.params.search);
+	return res.status(200);
 };
 
 function getRandom(arr, n) {

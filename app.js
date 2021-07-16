@@ -1,12 +1,15 @@
 require('dotenv').config();
+const newrelic = require('newrelic');
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 // Body-parser middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
 /* Connect to MongoDB */
 require('./models/Story.js');
@@ -42,3 +45,36 @@ app.use(require('./controllers/error'));
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+
+setInterval(function sampleMemory() {
+	var stats = process.memoryUsage();
+
+	newrelic.recordCustomEvent('NodeMemory', stats);
+}, 5000);
+
+if (process.cpuUsage) {
+	var lastUsage;
+
+	// sampling interval in milliseconds
+
+	var interval = 60000;
+
+	setInterval(function sampleCpu() {
+		// get CPU usage since the process started
+
+		var usage = process.cpuUsage();
+
+		if (lastUsage) {
+			// calculate percentage
+
+			var intervalInMicros = interval * 1000;
+
+			var userPercent =
+				((usage.user - lastUsage.user) / intervalInMicros) * 100;
+
+			newrelic.recordCustomEvent('NodeCPU', { userPercent: userPercent });
+		}
+
+		lastUsage = usage;
+	}, interval);
+}
