@@ -54,8 +54,8 @@ export const HomePage = ({ setLoading }) => {
 		'Atlassian',
 		'Apple',
 		'Google',
-		'GSoC',
-		'Walmart Labs',
+		'Flipkart',
+		'Microsoft',
 	];
 
 	const coreTags = [
@@ -66,7 +66,28 @@ export const HomePage = ({ setLoading }) => {
 		'Analog Devices',
 	];
 	const businessTags = ['Bain & Company'];
-	const productTags = ['CRED', 'Trell', 'FamPay', 'Groww'];
+	const productTags = [
+		'CRED',
+		'Trell',
+		'FamPay',
+		'Groww',
+		'LazyPay',
+		'OLX',
+		'QuickRide',
+	];
+
+	const financeTags = [
+		'JP Morgan',
+		'Goldman Sachs',
+		'Credit Suisse',
+		'Nomura',
+	];
+
+	const researchTags = [
+		'Caltech',
+		'MITACS',
+		'University of British Columbia',
+	];
 
 	useEffect(() => {
 		axios.get('/api/story').then((res) => {
@@ -86,24 +107,6 @@ export const HomePage = ({ setLoading }) => {
 				>
 					BITSian Stories
 				</Typography>
-				<Typography
-					variant="body1"
-					color="textSecondary"
-					align="center"
-					style={{
-						fontSize: '20px',
-						marginTop: '20px',
-					}}
-				>
-					<p style={{ fontStyle: 'italic' }}>
-						“Knowing is Not Enough, We must apply. Willing is not
-						enough, we must do”
-					</p>
-					With this initiative, we aim to make career options and
-					procedures more transparent for our students to make the
-					most of them. Even the most talented people need to be aware
-					of the options available for them.
-				</Typography>
 				<Grid
 					container
 					direction="row"
@@ -112,301 +115,341 @@ export const HomePage = ({ setLoading }) => {
 					style={{ marginTop: '20px' }}
 				>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-laptop-code"
+						<Link href="/category/tech" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
 											color="primary"
 											style={{
-												marginRight: '10px',
-												width: '30px',
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
 											}}
-											fontSize="default"
-										></Icon>
-										Tech
-									</Typography>
-									<div className={classes.tags2}>
-										{techTags.map((tag) => (
-											<Link
-												underline="none"
-												href={
-													'/category/tech/' +
-													'?search=' +
-													tag
-												}
-											>
-												<Chip
-													label={tag}
-													color="secondary"
-													variant="outlined"
-													clickable
-													style={{
-														fontSize: '12px',
-													}}
-												/>
-											</Link>
-										))}
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+										>
+											<Icon
+												className="fas fa-laptop-code"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Tech
+										</Typography>
+										<div className={classes.tags2}>
+											{techTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/tech' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-cogs"
+						<Link href="/category/core" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
 											color="primary"
 											style={{
-												marginRight: '10px',
-												width: '30px',
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
 											}}
-											fontSize="default"
-										></Icon>
-										Core
-									</Typography>
-									<div className={classes.tags2}>
-										{coreTags.map((tag) => (
-											<Link
-												underline="none"
-												href={
-													'/category/core/' +
-													'?search=' +
-													tag
-												}
-											>
-												<Chip
-													label={tag}
-													color="secondary"
-													variant="outlined"
-													clickable
-													style={{
-														fontSize: '12px',
-													}}
-												/>
-											</Link>
-										))}
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+										>
+											<Icon
+												className="fas fa-cogs"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Core
+										</Typography>
+										<div className={classes.tags2}>
+											{coreTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/core' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-tasks"
+						<Link href="/category/product" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
 											color="primary"
 											style={{
-												marginRight: '10px',
-												width: '30px',
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
 											}}
-											fontSize="default"
-										></Icon>
-										Product
-									</Typography>
-									<div className={classes.tags2}>
-										{productTags.map((tag) => (
-											<Link
-												underline="none"
-												href={
-													'/category/product/' +
-													'?search=' +
-													tag
-												}
-											>
-												<Chip
-													label={tag}
-													color="secondary"
-													variant="outlined"
-													clickable
-													style={{
-														fontSize: '12px',
-													}}
-												/>
-											</Link>
-										))}
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+										>
+											<Icon
+												className="fas fa-tasks"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Product
+										</Typography>
+										<div className={classes.tags2}>
+											{productTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/product' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-chart-line"
+						<Link href="/category/finance" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
 											color="primary"
 											style={{
-												marginRight: '10px',
-												width: '30px',
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
 											}}
-											fontSize="default"
-										></Icon>
-										Business
-									</Typography>
-									<div className={classes.tags2}>
-										{businessTags.map((tag) => (
-											<Link
-												underline="none"
-												href={
-													'/category/business/' +
-													'?search=' +
-													tag
-												}
-											>
-												<Chip
-													label={tag}
-													color="secondary"
-													variant="outlined"
-													clickable
-													style={{
-														fontSize: '12px',
-													}}
-												/>
-											</Link>
-										))}
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-percentage"
-											color="primary"
-											style={{
-												marginRight: '10px',
-												width: '30px',
-											}}
-											fontSize="default"
-										></Icon>
-										Finance
-									</Typography>
-									<Typography
-										variant="body2"
-										color="textSecondary"
-										component="p"
-									>
-										Get to know more about Finance companies
-										and their work culture!
-									</Typography>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+										>
+											<Icon
+												className="fas fa-percentage"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Finance
+										</Typography>
+										<div className={classes.tags2}>
+											{financeTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/finance' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
 					</Grid>
 
 					<Grid item xs={12} sm={6} md={4}>
-						<Card>
-							<CardActionArea>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="h2"
-										align="center"
-										color="primary"
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											flexWrap: 'wrap',
-											justifyContent: 'center',
-										}}
-									>
-										<Icon
-											className="fas fa-flask"
+						<Link href="/category/research" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
 											color="primary"
 											style={{
-												marginRight: '10px',
-												width: '30px',
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
 											}}
-											fontSize="default"
-										></Icon>
-										Research
-									</Typography>
-									<Typography
-										variant="body2"
-										color="textSecondary"
-										component="p"
-									>
-										Get to know more about Research Roles
-										and their work culture!
-									</Typography>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+										>
+											<Icon
+												className="fas fa-flask"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Research
+										</Typography>
+										<div className={classes.tags2}>
+											{researchTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/research' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4}>
+						<Link href="/category/business" underline="none">
+							<Card>
+								<CardActionArea>
+									<CardContent>
+										<Typography
+											gutterBottom
+											variant="h6"
+											component="h2"
+											align="center"
+											color="primary"
+											style={{
+												display: 'flex',
+												alignItems: 'center',
+												flexWrap: 'wrap',
+												justifyContent: 'center',
+											}}
+										>
+											<Icon
+												className="fas fa-chart-line"
+												color="primary"
+												style={{
+													marginRight: '10px',
+													width: '30px',
+												}}
+												fontSize="default"
+											></Icon>
+											Business
+										</Typography>
+										<div className={classes.tags2}>
+											{businessTags.map((tag) => (
+												<Link
+													underline="none"
+													href={
+														'/category/business' +
+														'?search=' +
+														tag
+													}
+												>
+													<Chip
+														label={tag}
+														color="secondary"
+														variant="outlined"
+														clickable
+														style={{
+															fontSize: '12px',
+														}}
+													/>
+												</Link>
+											))}
+										</div>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Link>
 					</Grid>
 				</Grid>
 			</Grid>

@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
 
 const CategoryPageBreadcrumbs = ({ category }) => {
 	const classes = useStyles();
+	let newCategory = category
+		.toLowerCase()
+		.split(' ')
+		.map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+		.join(' ');
 	return (
 		<Breadcrumbs aria-label="breadcrumb" style={{ lineHeight: '2' }}>
 			<StyledBreadcrumb
@@ -28,7 +33,7 @@ const CategoryPageBreadcrumbs = ({ category }) => {
 			<StyledBreadcrumb
 				component="a"
 				href={'#'}
-				label={category}
+				label={newCategory}
 				icon={<SchoolIcon />}
 			/>
 		</Breadcrumbs>

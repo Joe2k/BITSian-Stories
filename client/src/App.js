@@ -31,16 +31,12 @@ function App() {
 	const [loading, setLoading] = React.useState(true);
 	const classes = useStyles();
 
-	if (!localStorage.getItem('user')) {
-		axios.post('/api/story/newUser');
-		localStorage.setItem('user', 'yes');
-	}
-
-	// React.useEffect(() => {
-	// 	window.addEventListener('load', () => {
-	// 		setLoading(false);
-	// 	});
-	// }, []);
+	React.useEffect(() => {
+		if (!localStorage.getItem('user')) {
+			localStorage.setItem('user', 'yes');
+			axios.post('/api/story/newUser');
+		}
+	}, []);
 	return (
 		<>
 			<Fade in={loading}>
