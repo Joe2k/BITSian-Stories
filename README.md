@@ -17,6 +17,10 @@
 -   Add social media share features
 -   ~~Add static rendering or pass meta data from server~~
 -   ~~Add Loading and Scrollbar~~
+-   Link the main stuff
+-   Branch, cgpa, role in readStory
+-   Flipkart, Microsoft
+-   About us
 
 Internships
 

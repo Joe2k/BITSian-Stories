@@ -440,7 +440,6 @@ export const HomePage = ({ setLoading }) => {
 										<CardMedia
 											component="img"
 											alt={story.title}
-											height="250"
 											image={story.profilePic}
 											title={story.title}
 										/>
