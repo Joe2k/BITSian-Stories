@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
 			display: 'none',
 		},
 	},
+	button: {
+		padding: '6px 16px',
+	},
 }));
 
 function Navbar() {
@@ -129,7 +132,9 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Tech</Button>
+						<Button className={classes.button} color="secondary">
+							Tech
+						</Button>
 					</Link>
 				</MenuItem>
 				<MenuItem>
@@ -152,7 +157,9 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Core</Button>
+						<Button className={classes.button} color="secondary">
+							Core
+						</Button>
 					</Link>
 				</MenuItem>
 				<MenuItem>
@@ -175,7 +182,9 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Finance</Button>
+						<Button className={classes.button} color="secondary">
+							Finance
+						</Button>
 					</Link>
 				</MenuItem>
 				<MenuItem>
@@ -198,7 +207,9 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Business</Button>
+						<Button className={classes.button} color="secondary">
+							Business
+						</Button>
 					</Link>
 				</MenuItem>
 				<MenuItem>
@@ -221,7 +232,9 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Product</Button>
+						<Button className={classes.button} color="secondary">
+							Product
+						</Button>
 					</Link>
 				</MenuItem>
 				<MenuItem>
@@ -244,13 +257,40 @@ function Navbar() {
 							}}
 							fontSize="default"
 						></Icon>
-						<Button color="secondary">Research</Button>
+						<Button className={classes.button} color="secondary">
+							Research
+						</Button>
 					</Link>
 				</MenuItem>
 
-				<MenuItem>
+				{/* <MenuItem>
 					<Link href="/story/new" underline="none">
-						<Button color="secondary">New</Button>
+						<Button className={classes.button} color="secondary">New</Button>
+					</Link>
+				</MenuItem> */}
+				<MenuItem>
+					<Link
+						href="/about"
+						underline="none"
+						color="secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							className="fas fa-users"
+							style={{
+								marginRight: '10px',
+								width: '30px',
+							}}
+							fontSize="default"
+						></Icon>
+						<Button className={classes.button} color="secondary">
+							About Us
+						</Button>
 					</Link>
 				</MenuItem>
 			</>
@@ -280,52 +320,96 @@ function Navbar() {
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Tech</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Tech
+								</Button>
 							</Link>
 							<Link
 								href="/category/core"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Core</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Core
+								</Button>
 							</Link>
 							<Link
 								href="/category/finance"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Finance</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Finance
+								</Button>
 							</Link>
 							<Link
 								href="/category/business"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Business</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Business
+								</Button>
 							</Link>
 							<Link
 								href="/category/product"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Product</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Product
+								</Button>
 							</Link>
 							<Link
 								href="/category/research"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">Research</Button>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									Research
+								</Button>
 							</Link>
 
-							<Link
+							{/* <Link
 								href="/story/new"
 								underline="none"
 								color="secondary"
 							>
-								<Button color="secondary">New</Button>
+								<Button className={classes.button} color="secondary">New</Button>
+							</Link> */}
+
+							<Link
+								href="/about"
+								underline="none"
+								color="secondary"
+							>
+								<Button
+									className={classes.button}
+									color="secondary"
+								>
+									About Us
+								</Button>
 							</Link>
 							<IconButton
+								className={classes.button}
 								color="secondary"
 								onClick={() => {
 									if (currentTheme === 'light')
@@ -344,7 +428,10 @@ function Navbar() {
 								target="_blank"
 								underline="none"
 							>
-								<IconButton color="secondary">
+								<IconButton
+									className={classes.button}
+									color="secondary"
+								>
 									<Icon
 										className="fab fa-github"
 										color="secondary"
@@ -355,6 +442,7 @@ function Navbar() {
 					</div>
 					<div className={classes.sectionMobile}>
 						<IconButton
+							className={classes.button}
 							color="secondary"
 							onClick={() => {
 								if (currentTheme === 'light') setTheme('dark');
@@ -368,6 +456,7 @@ function Navbar() {
 							)}
 						</IconButton>
 						<IconButton
+							className={classes.button}
 							aria-label="show more"
 							aria-controls={mobileMenuId}
 							aria-haspopup="true"

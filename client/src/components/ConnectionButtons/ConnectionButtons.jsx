@@ -114,7 +114,7 @@ const ConnectionButtons = ({ urls, id }) => {
 				</IconButton>
 			</Tooltip>
 
-			<Link href={'/story/' + id + '/edit'} underline="none">
+			{/* <Link href={'/story/' + id + '/edit'} underline="none">
 				<IconButton color="primary" component="span">
 					<Icon
 						className="fas fa-pen"
@@ -122,7 +122,7 @@ const ConnectionButtons = ({ urls, id }) => {
 						fontSize="medium"
 					></Icon>
 				</IconButton>
-			</Link>
+			</Link> */}
 		</Box>
 	);
 };

@@ -173,7 +173,7 @@ export const ReadStory = ({ setLoading }) => {
 												}}
 												className="css-1p0umon graf"
 											>
-												{branch}
+												Branch: {branch}
 											</h1>
 										)}
 										{branch && currentTheme === 'dark' && (
@@ -183,7 +183,7 @@ export const ReadStory = ({ setLoading }) => {
 												}}
 												className="css-1rrft7a graf"
 											>
-												{branch}
+												Branch: {branch}
 											</h1>
 										)}
 									</div>
@@ -195,7 +195,7 @@ export const ReadStory = ({ setLoading }) => {
 												}}
 												className="css-1p0umon graf"
 											>
-												CGPA : {cgpa}
+												CGPA: {cgpa}
 											</h1>
 										)}
 										{cgpa && currentTheme === 'dark' && (
@@ -205,7 +205,7 @@ export const ReadStory = ({ setLoading }) => {
 												}}
 												className="css-1rrft7a graf"
 											>
-												CGPA : {cgpa}
+												CGPA: {cgpa}
 											</h1>
 										)}
 									</div>
@@ -222,7 +222,7 @@ export const ReadStory = ({ setLoading }) => {
 													}}
 													className="css-1p0umon graf"
 												>
-													{category}
+													Role: {category}
 												</h2>
 											) : (
 												<h2
@@ -231,7 +231,7 @@ export const ReadStory = ({ setLoading }) => {
 													}}
 													className="css-1rrft7a graf"
 												>
-													{category}
+													Role: {category}
 												</h2>
 											)}
 										</div>

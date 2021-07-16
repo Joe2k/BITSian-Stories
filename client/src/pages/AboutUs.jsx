@@ -1,4 +1,11 @@
-import { Box, Grid, Link, makeStyles, Typography } from '@material-ui/core';
+import {
+	Box,
+	Divider,
+	Grid,
+	Link,
+	makeStyles,
+	Typography,
+} from '@material-ui/core';
 import React from 'react';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
 
@@ -88,6 +95,7 @@ const AboutUs = ({ setLoading }) => {
 						style={{
 							fontSize: '22px',
 							marginTop: '50px',
+							marginBottom: '30px',
 						}}
 					>
 						With this vision in mind, thousands of BITSians have
@@ -97,6 +105,28 @@ const AboutUs = ({ setLoading }) => {
 						who have done fantastic in the area of their interests
 						so that the upcoming batches can learn from their wisdom
 						and knowledge and take the legacy forward!
+					</Typography>
+					<Divider />
+					<Typography
+						variant="body1"
+						color="textPrimary"
+						align="center"
+						style={{
+							fontSize: '22px',
+							marginTop: '30px',
+						}}
+					>
+						We are always looking out for authors who have a unique
+						story to tell. Please fill out this{' '}
+						<Link
+							target="_blank"
+							href="https://docs.google.com/forms/d/e/1FAIpQLSdoqSP8mN4XO8nVrj6_8swCtkAPbfWgSSSRHZipJUPZRaiynw/viewform?usp=sf_link"
+						>
+							form
+						</Link>{' '}
+						if you'd like to contribute to the articles or want to
+						nominate someone else and we'll contact you for more
+						details!
 					</Typography>
 				</Grid>
 			</Grid>
