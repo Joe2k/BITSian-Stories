@@ -20,9 +20,12 @@ router.get('/story/:uniqueName', async (req, res) => {
 		let updated = raw.toString().replace(/\$OG_TITLE/g, 'BITSian Stories');
 		updated = updated.replace(
 			/\$OG_DESCRIPTION/g,
-			'Untold Stories of Students from BITS Pilani, Hyderabad Campus'
+			'Bringing to you the experiences and anecdotes of some incredible BITSians who have done fantastic in the area of their interests!'
 		);
-		updated = updated.replace(/\$OG_IMAGE/g, '');
+		updated = updated.replace(
+			/\$OG_IMAGE/g,
+			'https://res.cloudinary.com/bitsianstories/image/upload/v1626503413/banner_gsd0fx.png'
+		);
 		res.send(updated);
 	} else {
 		let bodyText = convert(story.body);
@@ -63,7 +66,7 @@ router.get('/category/:category', (req, res) => {
 		.replace(/\$OG_TITLE/g, 'BITSian Stories - ' + req.params.category);
 	updated = updated.replace(
 		/\$OG_DESCRIPTION/g,
-		'Get to know more about companies and their work culture!'
+		'Bringing to you the experiences and anecdotes of some incredible BITSians who have done fantastic in the area of their interests!'
 	);
 	updated = updated.replace(
 		/\$OG_IMAGE/g,
@@ -84,7 +87,7 @@ router.get('/', (req, res) => {
 	let updated = raw.toString().replace(/\$OG_TITLE/g, 'BITSian Stories');
 	updated = updated.replace(
 		/\$OG_DESCRIPTION/g,
-		'Untold Stories of Students from BITS Pilani, Hyderabad Campus'
+		'Bringing to you the experiences and anecdotes of some incredible BITSians who have done fantastic in the area of their interests!'
 	);
 	updated = updated.replace(
 		/\$OG_IMAGE/g,
