@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Dante, { ImageBlockConfig } from 'dante3';
 import {
 	makeStyles,
 	Button,
 	Grid,
-	Input,
 	TextField,
 	InputLabel,
 	Select,

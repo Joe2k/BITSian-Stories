@@ -6,24 +6,17 @@ import {
 	Grid,
 	Box,
 	Link,
-	IconButton,
-	Icon,
 	Chip,
-	Avatar,
 	Typography,
-	withStyles,
-	emphasize,
 	CardMedia,
 	CardActionArea,
 	CardContent,
 	Card,
 	Divider,
-	Paper,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Tooltip from '@material-ui/core/Tooltip';
 import ConnectionButtons from '../components/ConnectionButtons/ConnectionButtons';
 import ReadStoryBreadcrumbs from '../components/Breadcrumbs/ReadStoryBreadcrumbs';
 import defaultTheme from '../themes/default';
