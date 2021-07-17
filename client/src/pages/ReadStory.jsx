@@ -22,6 +22,7 @@ import ReadStoryBreadcrumbs from '../components/Breadcrumbs/ReadStoryBreadcrumbs
 import defaultTheme from '../themes/default';
 import darkTheme from '../themes/dark';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
+import Disqus from 'disqus-react';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -80,6 +81,12 @@ export const ReadStory = ({ setLoading }) => {
 	const [recommendations, setRecommendations] = useState([]);
 	const [branch, setBranch] = useState('');
 	const [error, setError] = useState('');
+	const disqusShortname = 'bitsian-stories';
+	const disqusConfig = {
+		url: window.location.href,
+		identifier: id,
+		title: title.replace(/<[^>]+>/g, ''),
+	};
 
 	useEffect(() => {
 		axios
@@ -270,6 +277,11 @@ export const ReadStory = ({ setLoading }) => {
 						}
 					/>
 				)}
+				<Disqus.DiscussionEmbed
+					shortname={disqusShortname}
+					config={disqusConfig}
+					blah={currentTheme}
+				/>
 				<Divider
 					variant="middle"
 					style={{
