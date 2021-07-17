@@ -56,6 +56,7 @@ export const CreateStory = ({ setLoading }) => {
 	const [uniqueName, setUniqueName] = useState();
 	const [cgpa, setCgpa] = useState();
 	const [branch, setBranch] = useState('');
+	const [password, setPassword] = useState('');
 
 	React.useEffect(() => {
 		window.addEventListener('load', () => {
@@ -82,6 +83,7 @@ export const CreateStory = ({ setLoading }) => {
 			formData.append('urls', JSON.stringify(urls));
 			formData.append('uniqueName', uniqueName);
 			formData.append('branch', branch);
+			formData.append('password', password);
 			if (cgpa) {
 				formData.append('cgpa', cgpa);
 			}
@@ -235,6 +237,13 @@ export const CreateStory = ({ setLoading }) => {
 				label="Instagram URL (Optional)"
 				fullWidth
 				onChange={handleChange}
+			/>
+			<TextField
+				id="password"
+				label="Password"
+				required
+				fullWidth
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<div style={{ marginTop: '20px' }}>
 				<ReactTags

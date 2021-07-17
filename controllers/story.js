@@ -10,6 +10,10 @@ exports.createStory = async (req, res, next) => {
 		// console.log(JSON.parse(req.body.tags));
 		// fs.unlinkSync(req.file.path);
 		// return res.status(500);
+		if (req.body.password !== process.env.ADMIN_PASS) {
+			fs.unlinkSync(req.file.path);
+			return next('Not authorized! Stop messing with me -.-!');
+		}
 
 		cloudinary.uploader.upload(req.file.path, async (error, result) => {
 			if (error) {
@@ -48,6 +52,9 @@ exports.createStory = async (req, res, next) => {
 };
 
 exports.updateStory = async (req, res, next) => {
+	if (req.body.password !== process.env.ADMIN_PASS) {
+		return next("Not authorized! Stop messing with me -.-!")
+	}
 	let body = {
 		title: req.body.title,
 		body: req.body.body,

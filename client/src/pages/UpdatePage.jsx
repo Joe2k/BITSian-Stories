@@ -53,6 +53,7 @@ export const UpdatePage = ({ setLoading }) => {
 	const [category, setCategory] = useState();
 	const [cgpa, setCgpa] = useState();
 	const [branch, setBranch] = useState('');
+	const [password, setPassword] = useState('');
 	let { uniqueName } = useParams();
 
 	useEffect(() => {
@@ -94,7 +95,7 @@ export const UpdatePage = ({ setLoading }) => {
 			uniqueName !== '' &&
 			branch !== ''
 		) {
-			let data = { body, title, category, urls, tags, branch };
+			let data = { body, title, category, urls, tags, branch, password };
 			if (cgpa) {
 				data = { ...data, cgpa };
 			}
@@ -241,6 +242,13 @@ export const UpdatePage = ({ setLoading }) => {
 				fullWidth
 				value={urls.instagram}
 				onChange={handleChange}
+			/>
+			<TextField
+				id="password"
+				label="Admin Password"
+				fullWidth
+				required
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<div style={{ marginTop: '20px' }}>
 				<ReactTags
