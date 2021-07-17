@@ -67,7 +67,7 @@ router.get('/category/:category', (req, res) => {
 	);
 	updated = updated.replace(
 		/\$OG_IMAGE/g,
-		'https://res.cloudinary.com/bitsianstories/image/upload/v1626502115/light_ybshlg.png'
+		'https://res.cloudinary.com/bitsianstories/image/upload/v1626503413/banner_gsd0fx.png'
 	);
 	res.send(updated);
 });
@@ -88,7 +88,7 @@ router.get('/', (req, res) => {
 	);
 	updated = updated.replace(
 		/\$OG_IMAGE/g,
-		'https://res.cloudinary.com/bitsianstories/image/upload/v1626502115/light_ybshlg.png'
+		'https://res.cloudinary.com/bitsianstories/image/upload/v1626503413/banner_gsd0fx.png'
 	);
 	res.send(updated);
 });
