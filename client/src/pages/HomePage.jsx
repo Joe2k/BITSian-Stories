@@ -13,6 +13,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import axios from 'axios';
+import { CustomThemeContext } from '../context/CustomThemeProvider';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomePage = ({ setLoading }) => {
 	const classes = useStyles();
+	const { currentTheme } = React.useContext(CustomThemeContext);
 	const [stories, setStories] = useState([]);
 	const techTags = [
 		'Adobe',
@@ -97,20 +99,21 @@ export const HomePage = ({ setLoading }) => {
 	return (
 		<Grid container className={classes.root}>
 			<Grid item xs={12}>
-				<Typography
-					variant="h2"
-					align="center"
-					style={{ fontWeight: 'bold' }}
-				>
-					BITSian Stories
-				</Typography>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					spacing={4}
-					style={{ marginTop: '20px' }}
-				>
+				<Grid container direction="row" justify="center" spacing={4}>
+					<Grid item xs={12} style={{ marginBottom: '20px' }}>
+						<Grid container direction="row" justify="center">
+							<img
+								alt="logo"
+								src={
+									currentTheme === 'light'
+										? 'light.png'
+										: 'dark.png'
+								}
+								style={{ width: '50%', minWidth: '250px' }}
+							/>
+						</Grid>
+					</Grid>
+
 					<Grid item xs={12} sm={6} md={4}>
 						<Link href="/category/tech" underline="none">
 							<Card>

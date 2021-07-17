@@ -301,7 +301,19 @@ function Navbar() {
 		<div className={classes.grow}>
 			<AppBar color="inherit" position="static">
 				<Toolbar>
-					<Typography
+					<Link color="inherit" underline="none" href="/">
+						<img
+							src={
+								currentTheme === 'light'
+									? '/light.png'
+									: '/dark.png'
+							}
+							style={{ height: '40px' }}
+							alt="logo"
+						/>
+					</Link>
+
+					{/* <Typography
 						className={classes.title}
 						variant="h6"
 						noWrap
@@ -310,7 +322,7 @@ function Navbar() {
 						<Link color="inherit" underline="none" href="/">
 							BITSian Stories
 						</Link>
-					</Typography>
+					</Typography> */}
 
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>

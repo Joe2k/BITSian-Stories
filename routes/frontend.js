@@ -65,7 +65,10 @@ router.get('/category/:category', (req, res) => {
 		/\$OG_DESCRIPTION/g,
 		'Get to know more about companies and their work culture!'
 	);
-	updated = updated.replace(/\$OG_IMAGE/g, '');
+	updated = updated.replace(
+		/\$OG_IMAGE/g,
+		'https://res.cloudinary.com/bitsianstories/image/upload/v1626502115/light_ybshlg.png'
+	);
 	res.send(updated);
 });
 
@@ -83,7 +86,10 @@ router.get('/', (req, res) => {
 		/\$OG_DESCRIPTION/g,
 		'Untold Stories of Students from BITS Pilani, Hyderabad Campus'
 	);
-	updated = updated.replace(/\$OG_IMAGE/g, '');
+	updated = updated.replace(
+		/\$OG_IMAGE/g,
+		'https://res.cloudinary.com/bitsianstories/image/upload/v1626502115/light_ybshlg.png'
+	);
 	res.send(updated);
 });
 
