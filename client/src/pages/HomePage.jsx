@@ -540,7 +540,7 @@ export const HomePage = ({ setLoading }) => {
 												{story.body}
 											</Typography>
 											<Typography
-												variant="body2"
+												variant="overline"
 												color="textSecondary"
 												component="p"
 												align="right"
