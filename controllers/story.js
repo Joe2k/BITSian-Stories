@@ -121,6 +121,7 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 				tags: story.tags,
 				uniqueName: story.uniqueName,
 				category: story.category,
+				stats: readingTime(story.body.replace(/<[^>]+>/g, '')),
 			});
 		});
 
