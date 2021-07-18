@@ -3,6 +3,7 @@ const { convert } = require('html-to-text');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const newrelic = require('newrelic');
+const readingTime = require('reading-time');
 
 exports.createStory = async (req, res, next) => {
 	try {
@@ -53,7 +54,7 @@ exports.createStory = async (req, res, next) => {
 
 exports.updateStory = async (req, res, next) => {
 	if (req.body.password !== process.env.ADMIN_PASS) {
-		return next("Not authorized! Stop messing with me -.-!")
+		return next('Not authorized! Stop messing with me -.-!');
 	}
 	let body = {
 		title: req.body.title,
@@ -142,6 +143,7 @@ exports.getAllStories = async (req, res, next) => {
 			bodyText = bodyText.split(' ');
 			bodyText = bodyText.slice(0, Math.min(20, bodyText.length));
 			bodyText = bodyText.join(' ');
+			bodyText += '...';
 			newStories.push({
 				id: story._id,
 				title: convert(story.title),
@@ -150,6 +152,7 @@ exports.getAllStories = async (req, res, next) => {
 				tags: story.tags,
 				uniqueName: story.uniqueName,
 				category: story.category,
+				stats: readingTime(story.body.replace(/<[^>]+>/g, '')),
 			});
 		});
 
@@ -171,6 +174,7 @@ exports.getStroiesByCategory = async (req, res, next) => {
 			bodyText = bodyText.split(' ');
 			bodyText = bodyText.slice(0, Math.min(20, bodyText.length));
 			bodyText = bodyText.join(' ');
+			bodyText += '...';
 			newStories.push({
 				id: story._id,
 				title: convert(story.title),
@@ -178,6 +182,7 @@ exports.getStroiesByCategory = async (req, res, next) => {
 				profilePic: story.profilePic,
 				tags: story.tags,
 				uniqueName: story.uniqueName,
+				stats: readingTime(story.body.replace(/<[^>]+>/g, '')),
 			});
 		});
 

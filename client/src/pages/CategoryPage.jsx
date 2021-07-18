@@ -211,6 +211,17 @@ export const CategoryPage = ({ setLoading }) => {
 												>
 													{story.body}
 												</Typography>
+												<Typography
+													variant="overline"
+													color="textSecondary"
+													component="p"
+													align="right"
+													style={{
+														marginTop: '10px',
+													}}
+												>
+													{story.stats.text}
+												</Typography>
 											</CardContent>
 										</CardActionArea>
 									</Card>

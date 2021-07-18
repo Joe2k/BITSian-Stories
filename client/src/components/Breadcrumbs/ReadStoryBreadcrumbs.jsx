@@ -1,11 +1,11 @@
-import { Breadcrumbs } from '@material-ui/core';
+import { Breadcrumbs, Typography } from '@material-ui/core';
 import React from 'react';
 import StyledBreadcrumb from './StyledBreadcrumb';
 import HomeIcon from '@material-ui/icons/Home';
 import SchoolIcon from '@material-ui/icons/School';
 import SmileIcon from '@material-ui/icons/Mood';
 
-const ReadStoryBreadcrumbs = ({ title, category }) => {
+const ReadStoryBreadcrumbs = ({ title, category, stats }) => {
 	return (
 		<Breadcrumbs
 			aria-label="breadcrumb"
@@ -29,6 +29,15 @@ const ReadStoryBreadcrumbs = ({ title, category }) => {
 				label={title && title.replace(/<[^>]+>/g, '')}
 				icon={<SmileIcon />}
 			/>
+			<Typography
+				variant="overline"
+				color="textSecondary"
+				component="p"
+				align="right"
+				// style={{ paddingTop: '5px' }}
+			>
+				{stats && stats.text}
+			</Typography>
 		</Breadcrumbs>
 	);
 };

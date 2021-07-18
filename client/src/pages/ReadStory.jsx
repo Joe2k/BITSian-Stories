@@ -23,6 +23,7 @@ import defaultTheme from '../themes/default';
 import darkTheme from '../themes/dark';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
 import Disqus from 'disqus-react';
+const readingTime = require('reading-time');
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -87,6 +88,7 @@ export const ReadStory = ({ setLoading }) => {
 		identifier: id,
 		title: title.replace(/<[^>]+>/g, ''),
 	};
+	const [stats, setStats] = useState({});
 
 	useEffect(() => {
 		axios
@@ -95,6 +97,7 @@ export const ReadStory = ({ setLoading }) => {
 				console.log(res.data);
 				setBody(res.data.body);
 				setTitle(res.data.title);
+				setStats(readingTime(res.data.body.replace(/<[^>]+>/g, '')));
 				setPicture(res.data.profilePic);
 				setCategory(res.data.category);
 				setUrls(res.data.urls);
@@ -120,7 +123,11 @@ export const ReadStory = ({ setLoading }) => {
 	return (
 		<>
 			<div className={classes.root}>
-				<ReadStoryBreadcrumbs title={title} category={category} />
+				<ReadStoryBreadcrumbs
+					title={title}
+					category={category}
+					stats={stats}
+				/>
 				{error && (
 					<Alert
 						variant="outlined"
@@ -165,6 +172,7 @@ export const ReadStory = ({ setLoading }) => {
 												: darkTheme
 										}
 									/>
+
 									<div>
 										{branch && currentTheme === 'light' && (
 											<h1
@@ -260,6 +268,9 @@ export const ReadStory = ({ setLoading }) => {
 									</div>
 
 									<ConnectionButtons id={id} urls={urls} />
+									{/* <Typography variant="overline">
+										{stats.text}
+									</Typography> */}
 								</div>
 							</Box>
 						)}
