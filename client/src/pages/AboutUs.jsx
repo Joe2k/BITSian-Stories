@@ -109,11 +109,12 @@ const AboutUs = ({ setLoading }) => {
 					<Divider />
 					<Typography
 						variant="body1"
-						color="textPrimary"
+						color="textSecondary"
 						align="center"
 						style={{
-							fontSize: '22px',
-							marginTop: '30px',
+							fontSize: '20px',
+							marginTop: '20px',
+							fontStyle: 'italic',
 						}}
 					>
 						We are always looking out for authors who have a unique
@@ -148,7 +149,21 @@ const AboutUs = ({ setLoading }) => {
 					content on this website is strictly the property of
 					BITSianStories. If you wish to reproduce any content herein,
 					please contact us: <br />
-					<br /> <strong>Co-ordinator:</strong> Pratik Kamdar <br />
+					<br /> <strong>Co-ordinator:</strong>{' '}
+					<Link
+						href="https://www.linkedin.com/in/pratik-kamdar-288392111/"
+						target="_blank"
+					>
+						Pratik Kamdar
+					</Link>{' '}
+					and{' '}
+					<Link
+						href="https://www.linkedin.com/in/joe2k/"
+						target="_blank"
+					>
+						Jonathan Samuel
+					</Link>{' '}
+					<br />
 					<strong>Mail to: </strong>
 					<Link href="mailto:stories.bitsian@gmail.com">
 						stories.bitsian@gmail.com

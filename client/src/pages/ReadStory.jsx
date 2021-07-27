@@ -23,6 +23,7 @@ import defaultTheme from '../themes/default';
 import darkTheme from '../themes/dark';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
 import Disqus from 'disqus-react';
+import $ from 'jquery';
 const readingTime = require('reading-time');
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,17 @@ export const ReadStory = ({ setLoading }) => {
 		title: title.replace(/<[^>]+>/g, ''),
 	};
 	const [stats, setStats] = useState({});
+
+	const disqus = $('#disqus_thread');
+
+	disqus.ready(function () {
+		setTimeout(function () {
+			if (disqus.children().length >= 3) {
+				const comments = disqus.find('iframe:nth-child(2)').detach();
+				disqus.empty().append(comments);
+			}
+		}, 2000);
+	});
 
 	useEffect(() => {
 		axios

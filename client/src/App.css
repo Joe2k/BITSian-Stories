@@ -98,3 +98,15 @@
 		padding: 0;
 	}
 }
+
+/* iframe[src*='ads-iframe'] {
+	display: none;
+} */
+
+/* iframe:nth-child(1) {
+	display: none !important;
+} */
+
+/* #ad-container {
+	display: none;
+} */
