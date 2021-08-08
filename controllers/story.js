@@ -1,4 +1,5 @@
 const Story = require('../models/Story');
+const Metric = require('../models/Metric');
 const { convert } = require('html-to-text');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
@@ -94,6 +95,15 @@ exports.getStoryByUniqueName = async (req, res, next) => {
 	newrelic.setTransactionName('/story/' + req.params.uniqueName);
 	newrelic.addCustomAttribute('uniqueName', req.params.uniqueName);
 	try {
+		Metric.findOneAndUpdate(
+			{ name: '/story/' + req.params.uniqueName },
+			{ $inc: { count: 1 } },
+			{ upsert: true },
+			(err, doc) => {
+				console.log(err);
+				console.log(doc);
+			}
+		);
 		const story = await Story.findOne({
 			uniqueName: req.params.uniqueName,
 		});
@@ -167,6 +177,15 @@ exports.getStroiesByCategory = async (req, res, next) => {
 	newrelic.setTransactionName('/category/' + req.params.category);
 	newrelic.addCustomAttribute('category', req.params.category);
 	try {
+		Metric.findOneAndUpdate(
+			{ name: '/category/' + req.params.category },
+			{ $inc: { count: 1 } },
+			{ upsert: true },
+			(err, doc) => {
+				console.log(err);
+				console.log(doc);
+			}
+		);
 		const stories = await Story.find({ category: req.params.category });
 		let newStories = [];
 
@@ -196,6 +215,15 @@ exports.getStroiesByCategory = async (req, res, next) => {
 exports.updateSearchMetrics = async (req, res, next) => {
 	newrelic.setTransactionName('/search/' + req.params.search);
 	newrelic.addCustomAttribute('search', req.params.search);
+	Metric.findOneAndUpdate(
+		{ name: '/search/' + req.params.search },
+		{ $inc: { count: 1 } },
+		{ upsert: true },
+		(err, doc) => {
+			console.log(err);
+			console.log(doc);
+		}
+	);
 	return res.status(200);
 };
 
@@ -203,6 +231,15 @@ exports.updateUserMetrics = async (req, res, next) => {
 	newrelic.incrementMetric('users');
 	newrelic.setTransactionName('/newUser');
 	newrelic.addCustomAttribute('newUser', 'yes');
+	Metric.findOneAndUpdate(
+		{ name: '/newUser' },
+		{ $inc: { count: 1 } },
+		{ upsert: true },
+		(err, doc) => {
+			console.log(err);
+			console.log(doc);
+		}
+	);
 	return res.status(200);
 };
 

@@ -13,6 +13,7 @@ app.use(cookieParser());
 
 /* Connect to MongoDB */
 require('./models/Story.js');
+require('./models/Metric.js');
 require('./config/mongoDB')();
 
 // Cloudinary Config
