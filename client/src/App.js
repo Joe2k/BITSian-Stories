@@ -20,6 +20,7 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import AboutUs from './pages/AboutUs';
+import Metrics from './pages/Metrics';
 const useStyles = makeStyles((theme) => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -61,6 +62,9 @@ function App() {
 					</Route>
 					<Route exact path="/about">
 						<AboutUs setLoading={setLoading} />
+					</Route>
+					<Route exact path="/metrics">
+						<Metrics setLoading={setLoading} />
 					</Route>
 					<Route exact path="/">
 						<HomePage setLoading={setLoading} />

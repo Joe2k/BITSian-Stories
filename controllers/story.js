@@ -243,6 +243,11 @@ exports.updateUserMetrics = async (req, res, next) => {
 	return res.status(200);
 };
 
+exports.getAllMetrics = async (req, res, next) => {
+	const metrics = await Metric.find({});
+	return res.json(metrics);
+};
+
 function getRandom(arr, n) {
 	var result = new Array(n),
 		len = arr.length,
