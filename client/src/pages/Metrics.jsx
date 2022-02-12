@@ -167,10 +167,26 @@ const Metrics = ({ setLoading }) => {
 						<Typography
 							variant="h4"
 							color="secondary"
+							component="h4"
+							style={{
+								marginBottom: '20px',
+								width: '100%',
+								textAlign: 'center',
+							}}
+						>
+							Stories
+						</Typography>
+						<Typography
+							variant="h5"
+							color="primary"
+							component="h5"
 							style={{ marginBottom: '20px' }}
 						>
-							Stories (Total Read -{' '}
-							{story.datasets[0].data.reduce((a, b) => a + b, 0)})
+							{story.datasets &&
+								'Total Articles Read - ' +
+									story.datasets[0].data
+										.reduce((a, b) => a + b, 0)
+										.toString()}
 						</Typography>
 						<Doughnut
 							data={story}
@@ -191,11 +207,24 @@ const Metrics = ({ setLoading }) => {
 						<Typography
 							variant="h4"
 							color="secondary"
+							style={{
+								marginBottom: '20px',
+								width: '100%',
+								textAlign: 'center',
+							}}
+						>
+							Searches
+						</Typography>
+						<Typography
+							variant="h5"
+							color="primary"
 							style={{ marginBottom: '20px' }}
 						>
-							Searches (Total Searches -{' '}
-							{search.datasets[0].data.reduce((a, b) => a + b, 0)}
-							)
+							{search.datasets &&
+								'Total Searches - ' +
+									search.datasets[0].data
+										.reduce((a, b) => a + b, 0)
+										.toString()}
 						</Typography>
 						<Doughnut
 							data={search}
