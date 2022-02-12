@@ -169,7 +169,8 @@ const Metrics = ({ setLoading }) => {
 							color="secondary"
 							style={{ marginBottom: '20px' }}
 						>
-							Stories
+							Stories (Total Read -{' '}
+							{story.datasets[0].data.reduce((a, b) => a + b, 0)})
 						</Typography>
 						<Doughnut
 							data={story}
@@ -192,7 +193,9 @@ const Metrics = ({ setLoading }) => {
 							color="secondary"
 							style={{ marginBottom: '20px' }}
 						>
-							Searches
+							Searches (Total Searches -{' '}
+							{search.datasets[0].data.reduce((a, b) => a + b, 0)}
+							)
 						</Typography>
 						<Doughnut
 							data={search}
