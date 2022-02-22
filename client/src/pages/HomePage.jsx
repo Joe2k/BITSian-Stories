@@ -14,6 +14,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import axios from 'axios';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -89,6 +90,7 @@ export const HomePage = ({ setLoading }) => {
 	];
 
 	useEffect(() => {
+		ReactGA.pageview(window.location.pathname);
 		axios.get('/api/story').then((res) => {
 			console.log(res.data);
 			setStories(res.data);

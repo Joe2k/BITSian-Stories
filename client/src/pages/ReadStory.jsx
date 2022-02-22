@@ -24,6 +24,7 @@ import darkTheme from '../themes/dark';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
 import Disqus from 'disqus-react';
 import $ from 'jquery';
+import ReactGA from 'react-ga';
 const readingTime = require('reading-time');
 
 const useStyles = makeStyles((theme) => ({
@@ -103,6 +104,8 @@ export const ReadStory = ({ setLoading }) => {
 	});
 
 	useEffect(() => {
+		ReactGA.pageview(window.location.pathname);
+
 		axios
 			.get(`/api/story/${id}`)
 			.then((res) => {
@@ -121,6 +124,12 @@ export const ReadStory = ({ setLoading }) => {
 					setBranch(res.data.branch);
 				}
 				console.log(cgpa);
+
+				ReactGA.event({
+					category: 'Story',
+					action: 'Read Story',
+					label: res.data.title,
+				});
 
 				setRecommendations(res.data.recommendations);
 				setLoading(false);
@@ -328,6 +337,13 @@ export const ReadStory = ({ setLoading }) => {
 								<Link
 									underline="none"
 									href={'/story/' + story.uniqueName}
+									onClick={() => {
+										ReactGA.event({
+											category: 'Story',
+											action: 'Story Clicked From Suggestions',
+											label: story.title,
+										});
+									}}
 								>
 									<Card style={{ maxWidth: '300' }}>
 										<CardActionArea>

@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
 import CategoryPageBreadcrumbs from '../components/Breadcrumbs/CategoryPageBreadcrumbs';
 import SearchBar from 'material-ui-search-bar';
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -61,6 +62,12 @@ export const CategoryPage = ({ setLoading }) => {
 	let { category } = useParams();
 
 	useEffect(() => {
+		ReactGA.pageview(window.location.pathname);
+		ReactGA.event({
+			category: 'Category',
+			action: 'Category Page',
+			label: category.charAt(0).toUpperCase() + category.slice(1),
+		});
 		axios
 			.get(
 				'/api/story/category/' +
@@ -97,6 +104,11 @@ export const CategoryPage = ({ setLoading }) => {
 		setStories(
 			mainStories.filter((d) => d.search.includes(search.toLowerCase()))
 		);
+		ReactGA.event({
+			category: 'Search',
+			action: 'Searched',
+			label: search,
+		});
 		axios.post('/api/story/search/' + search);
 	}, [search]);
 

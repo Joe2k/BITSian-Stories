@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { CustomThemeContext } from '../context/CustomThemeProvider';
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -43,6 +44,7 @@ const AboutUs = ({ setLoading }) => {
 	const { currentTheme } = React.useContext(CustomThemeContext);
 
 	React.useEffect(() => {
+		ReactGA.pageview(window.location.pathname);
 		window.addEventListener('load', () => {
 			setLoading(false);
 		});

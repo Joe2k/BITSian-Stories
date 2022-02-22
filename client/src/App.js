@@ -21,6 +21,10 @@ import {
 import axios from 'axios';
 import AboutUs from './pages/AboutUs';
 import Metrics from './pages/Metrics';
+import ReactGA from 'react-ga';
+const TRACKING_ID = 'UA-221188085-1';
+ReactGA.initialize(TRACKING_ID);
+
 const useStyles = makeStyles((theme) => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,

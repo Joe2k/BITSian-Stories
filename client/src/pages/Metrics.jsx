@@ -157,7 +157,7 @@ const Metrics = ({ setLoading }) => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} style={{ marginBottom: '100px' }}>
+				<Grid item xs={12} style={{ marginBottom: '200px' }}>
 					<Grid
 						container
 						direction="row"
